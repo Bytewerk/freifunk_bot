@@ -1,8 +1,8 @@
-= Freifunk-Bot =
+# Freifunk-Bot
 
 Ein IRC-Bot für Freifunk-Netze, geschrieben in Python 3.
 
-== Aktueller Stand ==
+## Aktueller Stand
 
 Die nodes.json einer Freifunk-Community wird regelmäßig abgefragt und Änderungen werden im Channel angezeigt. Dazu gehören:
 
@@ -10,7 +10,7 @@ Die nodes.json einer Freifunk-Community wird regelmäßig abgefragt und Änderun
 - Gelöschte Knoten
 - Änderungen im online/offline-Status
 
-== Abhängigkeiten ==
+## Abhängigkeiten
 
 Python-Module:
 
