@@ -1,0 +1,270 @@
+{
+  "nodes": [
+    {
+      "name": "Hildegard-Knef-Str3-01", 
+      "firmware": "v2014.4+5", 
+      "flags": {
+        "gateway": false, 
+        "online": false
+      }, 
+      "clientcount": 0, 
+      "geo": [
+        48.758085507847, 
+        11.442861557007
+      ], 
+      "id": "c4:6e:1f:41:fd:1a"
+    }, 
+    {
+      "name": "bytewerk-dev", 
+      "firmware": "v2014.4+5", 
+      "flags": {
+        "gateway": false, 
+        "online": true
+      }, 
+      "clientcount": 1, 
+      "geo": null, 
+      "id": "e8:94:f6:51:af:ba"
+    }, 
+    {
+      "name": "SPD", 
+      "firmware": "v2014.4+4", 
+      "flags": {
+        "gateway": false, 
+        "online": true
+      }, 
+      "clientcount": 0, 
+      "geo": [
+        48.76581085, 
+        11.43056631
+      ], 
+      "id": "c4:6e:1f:e8:0a:68"
+    }, 
+    {
+      "name": "ffin-gw2", 
+      "firmware": "Debian", 
+      "flags": {
+        "gateway": true, 
+        "online": true
+      }, 
+      "clientcount": 1, 
+      "geo": null, 
+      "id": "ba:d1:de:af:00:03"
+    }, 
+    {
+      "name": "fusselkater", 
+      "firmware": "v2014.4+4", 
+      "flags": {
+        "gateway": false, 
+        "online": true
+      }, 
+      "clientcount": 1, 
+      "geo": [
+        48.744255, 
+        11.602303
+      ], 
+      "id": "e8:94:f6:4b:81:d2"
+    }, 
+    {
+      "name": "sqozz1", 
+      "firmware": "v2014.4+5", 
+      "flags": {
+        "gateway": false, 
+        "online": true
+      }, 
+      "clientcount": 0, 
+      "geo": [
+        48.658726698057, 
+        11.209664940834
+      ], 
+      "id": "10:fe:ed:cd:a5:96"
+    }, 
+    {
+      "name": "chromsound", 
+      "firmware": "v2014.4+4", 
+      "flags": {
+        "gateway": false, 
+        "online": true
+      }, 
+      "clientcount": 1, 
+      "geo": [
+        48.77375, 
+        11.419329
+      ], 
+      "id": "c4:6e:1f:bd:4d:d4"
+    }, 
+    {
+      "name": "ffin-gw1", 
+      "firmware": "Debian", 
+      "flags": {
+        "gateway": true, 
+        "online": true
+      }, 
+      "clientcount": 1, 
+      "geo": null, 
+      "id": "ba:d1:de:af:00:02"
+    }, 
+    {
+      "name": "ffin-web", 
+      "firmware": "Debian", 
+      "flags": {
+        "gateway": false, 
+        "online": true
+      }, 
+      "clientcount": 0, 
+      "geo": null, 
+      "id": "ba:d1:de:af:00:10"
+    }, 
+    {
+      "name": "bytewerk", 
+      "firmware": "v2014.4+5", 
+      "flags": {
+        "gateway": false, 
+        "online": true
+      }, 
+      "clientcount": 1, 
+      "geo": [
+        48.77084846038, 
+        11.381868124008
+      ], 
+      "id": "c4:6e:1f:e7:c4:00"
+    }, 
+    {
+      "name": "cfr34k", 
+      "firmware": null, 
+      "flags": {
+        "gateway": false, 
+        "online": false
+      }, 
+      "clientcount": 0, 
+      "geo": [
+        48.73724, 
+        11.41367
+      ], 
+      "id": "b0:48:7a:be:99:12"
+    }, 
+    {
+      "name": "esclear", 
+      "firmware": null, 
+      "flags": {
+        "gateway": false, 
+        "online": true
+      }, 
+      "clientcount": 0, 
+      "geo": [
+        48.767127, 
+        11.396362
+      ], 
+      "id": "24:a4:3c:f8:5c:15"
+    }
+  ], 
+  "meta": {
+    "timestamp": "2015-01-24T00:33:02"
+  }, 
+  "links": [
+    {
+      "source": 0, 
+      "type": "vpn", 
+      "quality": "1.016, 1.000", 
+      "id": "ba:d1:de:af:00:03-c6:72:1f:41:fd:1a", 
+      "target": 3
+    }, 
+    {
+      "source": 1, 
+      "type": "vpn", 
+      "quality": "1.016, 1.000", 
+      "id": "ba:d1:de:af:00:02-ea:98:f6:51:af:ba", 
+      "target": 7
+    }, 
+    {
+      "source": 7, 
+      "type": "vpn", 
+      "quality": "1.000, 1.000", 
+      "id": "ba:d1:de:af:00:02-c6:72:1f:41:fd:1a", 
+      "target": 0
+    }, 
+    {
+      "source": 7, 
+      "type": "vpn", 
+      "quality": "1.016, 1.000, 4.474", 
+      "id": "ba:d1:de:af:00:02-c6:72:1f:bd:4d:d4", 
+      "target": 6
+    }, 
+    {
+      "source": 8, 
+      "type": "vpn", 
+      "quality": "1.000, 1.250", 
+      "id": "ba:d1:de:af:00:03-ba:d1:de:af:00:10", 
+      "target": 3
+    }, 
+    {
+      "source": 1, 
+      "type": "vpn", 
+      "quality": "1.000, 1.000", 
+      "id": "ba:d1:de:af:00:03-ea:98:f6:51:af:ba", 
+      "target": 3
+    }, 
+    {
+      "source": 7, 
+      "type": "vpn", 
+      "quality": "1.000, 3.923, 5.667", 
+      "id": "ba:d1:de:af:00:02-ba:d1:de:af:00:10", 
+      "target": 8
+    }, 
+    {
+      "source": 7, 
+      "type": "vpn", 
+      "quality": "1.000, 1.000, 5.000", 
+      "id": "ba:d1:de:af:00:02-ea:98:f6:4b:81:d2", 
+      "target": 4
+    }, 
+    {
+      "source": 7, 
+      "type": "vpn", 
+      "quality": "1.000, 1.000, 4.250", 
+      "id": "ba:d1:de:af:00:02-c6:72:1f:e8:0a:68", 
+      "target": 2
+    }, 
+    {
+      "source": 9, 
+      "type": "vpn", 
+      "quality": "1.000, 1.000", 
+      "id": "ba:d1:de:af:00:02-c6:72:1f:e7:c4:00", 
+      "target": 7
+    }, 
+    {
+      "source": 9, 
+      "type": "vpn", 
+      "quality": "1.000, 1.000", 
+      "id": "ba:d1:de:af:00:03-c6:72:1f:e7:c4:00", 
+      "target": 3
+    }, 
+    {
+      "source": 1, 
+      "type": null, 
+      "quality": "1.000, 1.016", 
+      "id": "c6:71:20:41:fd:1a-ea:97:f7:51:af:ba", 
+      "target": 0
+    }, 
+    {
+      "source": 7, 
+      "type": "vpn", 
+      "quality": "1.000, 1.000, 4.250", 
+      "id": "12:02:ed:cd:a5:96-ba:d1:de:af:00:02", 
+      "target": 5
+    }, 
+    {
+      "source": 5, 
+      "type": "vpn", 
+      "quality": "1.000, 1.000", 
+      "id": "12:02:ed:cd:a5:96-ba:d1:de:af:00:03", 
+      "target": 3
+    }, 
+    {
+      "source": 7, 
+      "type": "vpn", 
+      "quality": "1.000, 1.000, 4.636", 
+      "id": "ba:d1:de:af:00:02-ba:d1:de:af:00:03", 
+      "target": 3
+    }
+  ]
+}
