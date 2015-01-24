@@ -1,0 +1,10 @@
+# copy this file to config.py and customize it for your own setup
+
+# URI of your network's nodes.json
+JSON_URI = 'http://localhost:8000/nodes.json'
+
+# Interval for reloading nodes.json
+UPDATE_INTERVAL = 60
+
+# number of update cycles a node must be gone to be announced as "deleted"
+DELETE_TIMEOUT = 3

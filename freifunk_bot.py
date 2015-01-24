@@ -5,14 +5,17 @@ import irc.client
 import requests
 import time
 import sys
+import os
 import threading
 
-INTERVAL = 60
+import config
 
 class Node:
-	nid = ''
-	name = ''
-	online = False
+	def __init__(self, json_obj):
+		self.nid = json_obj['id']
+		self.name = json_obj['name']
+		self.online = json_obj['flags']['online']
+		self.delete_counter = 0
 
 class FreifunkBot(irc.client.SimpleIRCClient):
 	def __init__(self, target):
@@ -44,19 +47,15 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 	def scheduler(self):
 		while True:
 			self.do_freifunk_cycle()
-			time.sleep(INTERVAL)
+			time.sleep(config.UPDATE_INTERVAL)
 
 	def do_freifunk_cycle(self):
-		r = requests.get('http://ingolstadt.freifunk.net/map/nodes.json')
-		#r = requests.get('http://localhost:8888/nodes.json')
+		r = requests.get(config.JSON_URI)
 		json = r.json()
 
 		current_nodes = {}
 		for node in json['nodes']:
-			n = Node()
-			n.nid = node['id']
-			n.name = node['name']
-			n.online = node['flags']['online']
+			n = Node(node)
 
 			current_nodes[n.nid] = n
 
@@ -72,6 +71,20 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 		new_nodes  = list(current_nids - known_nids)
 		gone_nodes = list(known_nids - current_nids)
 
+		really_gone_nodes = []
+		for nid in gone_nodes:
+			n = self.known_nodes[nid]
+			n.delete_counter += 1
+			print("{} not seen for {} update cycles".format(n.name, n.delete_counter))
+
+			if n.delete_counter >= config.DELETE_TIMEOUT:
+				# if a node was gone long enough, really drop and report it
+				really_gone_nodes.append(nid)
+			else:
+				# if not, put it back as "still here"
+				current_nodes[nid] = n
+
+
 		changed_nodes = []
 		for nid, node in current_nodes.items():
 			if nid in self.known_nodes.keys():
@@ -80,17 +93,17 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 
 		for nid in new_nodes:
 			msg = "Neuer Knoten: {:s}".format(current_nodes[nid].name)
-			self.connection.privmsg(self.target, msg)
+			self.connection.notice(self.target, msg)
 
-		for nid in gone_nodes:
+		for nid in really_gone_nodes:
 			msg = "Knoten gelöscht: {:s}".format(self.known_nodes[nid].name)
-			self.connection.privmsg(self.target, msg)
+			self.connection.notice(self.target, msg)
 
 		for nid in changed_nodes:
 			msg = "{:s} ist jetzt {}".format(
 					current_nodes[nid].name,
 					"online" if current_nodes[nid].online else "offline")
-			self.connection.privmsg(self.target, msg)
+			self.connection.notice(self.target, msg)
 
 		self.known_nodes = current_nodes
 
