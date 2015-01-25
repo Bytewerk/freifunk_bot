@@ -50,7 +50,12 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			time.sleep(config.UPDATE_INTERVAL)
 
 	def do_freifunk_cycle(self):
-		r = requests.get(config.JSON_URI)
+		try:
+			r = requests.get(config.JSON_URI)
+		except:
+			print("Request failed")
+			return
+
 		json = r.json()
 
 		current_nodes = {}
