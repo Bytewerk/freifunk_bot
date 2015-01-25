@@ -8,3 +8,6 @@ UPDATE_INTERVAL = 60
 
 # number of update cycles a node must be gone to be announced as "deleted"
 DELETE_TIMEOUT = 3
+
+# path to the database
+DATABASE = 'data/data.sqlite'

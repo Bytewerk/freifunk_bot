@@ -7,6 +7,7 @@ import time
 import sys
 import os
 import threading
+import sqlite3
 
 import config
 
@@ -15,7 +16,38 @@ class Node:
 		self.nid = json_obj['id']
 		self.name = json_obj['name']
 		self.online = json_obj['flags']['online']
+		self.clients = json_obj['clientcount']
+		self.max_clients = -1
+		self.max_clients_timestamp = -1
 		self.delete_counter = 0
+
+	def loadMaxClients(self, db):
+		c = db.cursor()
+
+		c.execute('SELECT clients, timestamp FROM node_highscores WHERE id=?', (self.nid,) )
+
+		row = c.fetchone()
+
+		if row:
+			self.max_clients, self.max_clients_timestamp = row
+
+	def saveMaxClients(self, db):
+		c = db.cursor()
+		result = c.execute('INSERT OR REPLACE INTO node_highscores VALUES(?, ?, ?)', (self.nid, self.max_clients, self.max_clients_timestamp) )
+
+	# returns True if a new highscore is reached, False otherwise
+	def updateHighscore(self, db):
+		if self.max_clients == -1:
+			self.loadMaxClients(db)
+
+		if self.clients > self.max_clients:
+			# new highscore!
+			self.max_clients = self.clients
+			self.max_clients_timestamp = int(time.time())
+			self.saveMaxClients(db)
+			return True
+		else:
+			return False
 
 class FreifunkBot(irc.client.SimpleIRCClient):
 	def __init__(self, target):
@@ -44,6 +76,9 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 	def on_privmsg(self, connection, event):
 		print("PRIVMSG {}".format(event.arguments[0]))
 
+	def on_pubmsg(self, connection, event):
+		print("PUBMSG {}".format(event.arguments[0]))
+
 	def scheduler(self):
 		while True:
 			self.do_freifunk_cycle()
@@ -64,7 +99,9 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 
 			current_nodes[n.nid] = n
 
-		if not self.known_nodes:
+		# check if this is the first run
+		firstRun = not self.known_nodes
+		if firstRun:
 			# first load
 			self.known_nodes = current_nodes
 			msg = "ist initialisiert: {:d} bekannte Knoten".format(len(current_nodes))
@@ -89,7 +126,6 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 				# if not, put it back as "still here"
 				current_nodes[nid] = n
 
-
 		changed_nodes = []
 		for nid, node in current_nodes.items():
 			if nid in self.known_nodes.keys():
@@ -110,7 +146,19 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 					"online" if current_nodes[nid].online else "offline")
 			self.connection.notice(self.target, msg)
 
+		# determine nodes with new client highscores
+		db = sqlite3.connect(config.DATABASE)
+
+		for node in current_nodes.values():
+			if node.updateHighscore(db) and not firstRun:
+				msg = "Knoten {:s} hat neuen Client-Highscore: {:d}!".format(node.name, node.max_clients)
+				self.connection.notice(self.target, msg)
+
+		db.commit()
+		db.close()
+
 		self.known_nodes = current_nodes
+
 
 def main():
 	if len(sys.argv) != 4:
