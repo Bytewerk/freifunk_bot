@@ -87,6 +87,8 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 		self.num_nodes        = 0
 		self.num_nodes_online = 0
 
+		self.channel_topic = ""
+
 		self.nodes_highscore        = Highscore('nodes')
 		self.clients_highscore      = Highscore('clients')
 		self.nodes_online_highscore = Highscore('nodes_online')
@@ -121,6 +123,14 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 	def on_disconnect(self, connection, event):
 		self.timer.stop()
 		sys.exit(0)
+
+	def on_currenttopic(self, connection, event):
+		print("CURRENTTOPIC {}: {}".format(event.source, event.arguments))
+		self.channel_topic = event.arguments[1]
+
+	def on_topic(self, connection, event):
+		print("TOPIC {}: {}".format(event.source, event.arguments[0]))
+		self.channel_topic = event.arguments[0]
 
 	def on_privmsg(self, connection, event):
 		source = event.source.split('!',1)[0]
@@ -241,10 +251,18 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 				if msg != "":
 					self.send_command_response(msg, response_target)
 
+		elif command == "topic":
+			pos = self.channel_topic.rfind('|')
+			new_topic = "{}| {} von {} Knoten online".format(
+					self.channel_topic[0:pos],
+					self.num_nodes_online,
+					self.num_nodes)
+			self.connection.topic(self.target, new_topic)
 		elif command == "help":
 			self.send_command_response("status [<node>]     Status des Netzwerks oder eines Knotens anzeigen", response_target)
 			self.send_command_response("highscore [<node>]  Highscores des Netzwerks oder eines Knotens anzeigen", response_target)
 			self.send_command_response("nodes [<cols>]      Alle Knoten im Netz auflisten (ID und Name), in <cols> Spalten", response_target)
+			self.send_command_response("topic               Topic mit aktuellen Knotenzahlen aktualisieren (Text nach letztem | wird ersetzt)", response_target)
 			self.send_command_response("<node> kann ein Knoten-Name oder eine ID (MAC-Adresse) sein.", response_target)
 		else:
 			self.send_command_response("Unbekannter Befehl. Benutze !help, um Befehle aufzulisten.", response_target)
