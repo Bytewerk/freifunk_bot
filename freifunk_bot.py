@@ -55,8 +55,10 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 		self.target = target
 
 		# map of id => node data
-		self.known_nodes = {}
-		self.num_clients = 0
+		self.known_nodes      = {}
+		self.num_clients      = 0
+		self.num_nodes        = 0
+		self.num_nodes_online = 0
 
 		self.timer = threading.Thread(target=self.scheduler, daemon=True);
 
@@ -116,8 +118,7 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 		if command == "status":
 			if len(cmdparts) == 1:
 				with self.known_nodes_lock:
-					num_nodes = len(self.known_nodes)
-					self.send_command_response("Das Netzwerk besteht zur Zeit aus {} Knoten mit {} Clients.".format(num_nodes, self.num_clients), response_target)
+					self.send_command_response("Status des gesamten Netzwerks: {} von {} Knoten online mit {} Clients.".format(self.num_nodes_online, self.num_nodes, self.num_clients), response_target)
 			else:
 				with self.known_nodes_lock:
 					node = self.find_node(cmdparts[1])
@@ -245,10 +246,14 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			db.commit()
 			db.close()
 
-			# update current global client count
+			# update global network status
+			self.num_nodes = len(current_nodes)
+			self.num_nodes_online = 0
 			self.num_clients = 0
 			for node in current_nodes.values():
 				self.num_clients += node.clients
+				if node.online:
+					self.num_nodes_online += 1
 
 			self.known_nodes = current_nodes
 
