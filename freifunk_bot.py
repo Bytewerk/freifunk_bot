@@ -49,6 +49,33 @@ class Node:
 		else:
 			return False
 
+class Highscore:
+	def __init__(self, key):
+		self.key       = key
+		self.value     = 0
+		self.timestamp = 0
+
+	def update(self, value):
+		if value > self.value:
+			self.value = value
+			self.timestamp = int(time.time())
+			return True
+		else:
+			return False
+
+	def load(self, db):
+		c = db.cursor();
+		result = c.execute('SELECT value, timestamp FROM highscores WHERE key=?', (self.key,) )
+
+		row = c.fetchone()
+
+		if row:
+			self.value, self.timestamp = row
+
+	def save(self, db):
+		c = db.cursor();
+		c.execute('UPDATE highscores SET value=?, timestamp=? WHERE key=?', (self.value, self.timestamp, self.key) )
+
 class FreifunkBot(irc.client.SimpleIRCClient):
 	def __init__(self, target):
 		irc.client.SimpleIRCClient.__init__(self)
@@ -59,6 +86,19 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 		self.num_clients      = 0
 		self.num_nodes        = 0
 		self.num_nodes_online = 0
+
+		self.nodes_highscore        = Highscore('nodes')
+		self.clients_highscore      = Highscore('clients')
+		self.nodes_online_highscore = Highscore('nodes_online')
+
+		# load the global highscores
+		db = sqlite3.connect(config.DATABASE)
+
+		self.nodes_highscore.load(db)
+		self.clients_highscore.load(db)
+		self.nodes_online_highscore.load(db)
+
+		db.close()
 
 		self.timer = threading.Thread(target=self.scheduler, daemon=True);
 
@@ -118,15 +158,52 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 		if command == "status":
 			if len(cmdparts) == 1:
 				with self.known_nodes_lock:
-					self.send_command_response("Status des gesamten Netzwerks: {} von {} Knoten online mit {} Clients.".format(self.num_nodes_online, self.num_nodes, self.num_clients), response_target)
+					self.send_command_response(
+							"Status des gesamten Netzwerks: {} von {} Knoten online mit {} Clients.".format(
+								self.num_nodes_online,
+								self.num_nodes,
+								self.num_clients),
+							response_target)
 			else:
 				with self.known_nodes_lock:
 					node = self.find_node(cmdparts[1])
 					if node:
 						if node.online:
-							self.send_command_response("Knoten {} [{}] ist online und hat {} Clients.".format(node.name, node.nid, node.clients), response_target)
+							self.send_command_response(
+									"Knoten {} [{}] ist online und hat {} Clients.".format(
+										node.name, node.nid, node.clients),
+									response_target)
 						else:
 							self.send_command_response("Knoten {} [{}] ist offline.".format(node.name, node.nid, node.clients), response_target)
+					else:
+						self.send_command_response("Es gibt keinen Knoten mit diesem Namen.", response_target)
+		elif command == "highscore":
+			if len(cmdparts) == 1:
+				with self.known_nodes_lock:
+					self.send_command_response(
+							"Knoten im Netzwerk: {:4d}, erreicht: {}".format(
+								self.nodes_highscore.value,
+								time.strftime(config.TIME_FORMAT, time.localtime(self.nodes_highscore.timestamp))),
+							response_target)
+					self.send_command_response(
+							"Knoten online:      {:4d}, erreicht: {}".format(
+								self.nodes_online_highscore.value,
+								time.strftime(config.TIME_FORMAT, time.localtime(self.nodes_online_highscore.timestamp))),
+							response_target)
+					self.send_command_response(
+							"Clients verbunden:  {:4d}, erreicht: {}".format(
+								self.clients_highscore.value,
+								time.strftime(config.TIME_FORMAT, time.localtime(self.clients_highscore.timestamp))),
+							response_target)
+			else:
+				with self.known_nodes_lock:
+					node = self.find_node(cmdparts[1])
+					if node:
+						self.send_command_response(
+								"Knoten {} [{}] hatte bisher max. {} Clients (erreicht: {}).".format(
+									node.name, node.nid, node.max_clients,
+									time.strftime(config.TIME_FORMAT, time.localtime(node.max_clients_timestamp))),
+								response_target)
 					else:
 						self.send_command_response("Es gibt keinen Knoten mit diesem Namen.", response_target)
 		elif command == "nodes":
@@ -161,8 +238,9 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 					self.send_command_response(msg, response_target)
 
 		elif command == "help":
-			self.send_command_response("status [<node>]   Status des Netzwerks oder eines Knotens anzeigen", response_target)
-			self.send_command_response("nodes [<cols>]    Alle Knoten im Netz auflisten (ID und Name), in <cols> Spalten", response_target)
+			self.send_command_response("status [<node>]     Status des Netzwerks oder eines Knotens anzeigen", response_target)
+			self.send_command_response("highscore [<node>]  Highscores des Netzwerks oder eines Knotens anzeigen", response_target)
+			self.send_command_response("nodes [<cols>]      Alle Knoten im Netz auflisten (ID und Name), in <cols> Spalten", response_target)
 			self.send_command_response("<node> kann ein Knoten-Name oder eine ID (MAC-Adresse) sein.", response_target)
 		else:
 			self.send_command_response("Unbekannter Befehl. Benutze !help, um Befehle aufzulisten.", response_target)
@@ -235,17 +313,6 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 						"online" if current_nodes[nid].online else "offline")
 				self.connection.notice(self.target, msg)
 
-			# determine nodes with new client highscores
-			db = sqlite3.connect(config.DATABASE)
-
-			for node in current_nodes.values():
-				if node.updateHighscore(db) and not firstRun:
-					msg = "Knoten {:s} hat neuen Client-Highscore: {:d}!".format(node.name, node.max_clients)
-					self.connection.notice(self.target, msg)
-
-			db.commit()
-			db.close()
-
 			# update global network status
 			self.num_nodes = len(current_nodes)
 			self.num_nodes_online = 0
@@ -254,6 +321,38 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 				self.num_clients += node.clients
 				if node.online:
 					self.num_nodes_online += 1
+
+			# Check new highscores
+			db = sqlite3.connect(config.DATABASE)
+
+			# per-node client highscore
+			for node in current_nodes.values():
+				if node.updateHighscore(db) and not firstRun:
+					msg = "Neuer Highscore: Knoten {:s} hat {:d} Clients!".format(node.name, node.max_clients)
+					self.connection.notice(self.target, msg)
+
+			db.commit()
+
+			# nodes registered
+			if self.nodes_highscore.update(self.num_nodes):
+				self.nodes_highscore.save(db)
+				msg = "Neuer Highscore: {:d} registrierte Knoten!".format(self.num_nodes)
+				self.connection.notice(self.target, msg)
+
+			# nodes online
+			if self.nodes_online_highscore.update(self.num_nodes_online):
+				self.nodes_online_highscore.save(db)
+				msg = "Neuer Highscore: {:d} Knoten online!".format(self.num_nodes_online)
+				self.connection.notice(self.target, msg)
+
+			# clients
+			if self.clients_highscore.update(self.num_clients):
+				self.clients_highscore.save(db)
+				msg = "Neuer Highscore: {:d} Clients verbunden!".format(self.num_clients)
+				self.connection.notice(self.target, msg)
+
+			db.commit()
+			db.close()
 
 			self.known_nodes = current_nodes
 

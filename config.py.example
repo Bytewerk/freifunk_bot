@@ -11,3 +11,6 @@ DELETE_TIMEOUT = 3
 
 # path to the database
 DATABASE = 'data/data.sqlite'
+
+# Time format used in chat messages
+TIME_FORMAT = '%Y-%m-%d %H:%M'
