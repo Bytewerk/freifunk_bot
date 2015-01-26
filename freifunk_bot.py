@@ -105,6 +105,10 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 		self.known_nodes_lock = threading.Lock()
 
 	def on_welcome(self, connection, event):
+		# send authentication message
+		if config.AUTH_MESSAGE:
+			connection.privmsg(config.AUTH_TARGET, config.AUTH_MESSAGE)
+
 		if irc.client.is_channel(self.target):
 			connection.join(self.target)
 		elif not self.timer.is_alive():

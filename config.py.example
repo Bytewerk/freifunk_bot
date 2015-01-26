@@ -14,3 +14,7 @@ DATABASE = 'data/data.sqlite'
 
 # Time format used in chat messages
 TIME_FORMAT = '%Y-%m-%d %H:%M'
+
+# authentication message
+AUTH_TARGET = "nickserv"
+AUTH_MESSAGE = "identify password"
