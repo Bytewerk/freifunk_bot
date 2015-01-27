@@ -271,10 +271,62 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 				self.connection.privmsg("chanserv", "topic {} {}".format(self.target, new_topic))
 			else:
 				self.connection.topic(self.target, new_topic)
+		elif command == "top":
+			num = 3
+			if len(cmdparts) >= 2:
+				try:
+					num = int(cmdparts[1])
+				except ValueError:
+					pass # use default
+
+			num = min(num, len(self.known_nodes))
+
+			nodes_limited = False
+			if is_public and num > config.PUBLIC_MAX_NODES:
+				nodes_limited = True
+				num = config.PUBLIC_MAX_NODES
+
+			with self.known_nodes_lock:
+				nodes_cur_clients = []
+				nodes_max_clients = []
+				max_name_len = 0
+
+				for node in self.known_nodes.values():
+					nodes_cur_clients.append( (node.clients, node.nid) )
+					nodes_max_clients.append( (node.max_clients, node.nid) )
+
+					if len(node.name) > max_name_len:
+						max_name_len = len(node.name)
+
+				nodes_cur_clients.sort(reverse=True)
+				nodes_max_clients.sort(reverse=True)
+
+				# -- Clients aktuell -----------------|-- Client-Highscore ----------------
+				# [00:00:00:00:00:00] Knoten-Name     |[00:00:00:00:00:00] Knoten-Name
+
+				col_width = 25 + max_name_len + 1
+				msg = '-- Clients aktuell ' + '-'*(col_width-19) + '|-- Client-Highscore ' + '-'*(col_width-20)
+				self.send_command_response(msg, response_target)
+
+				for i in range(num):
+					lnode = self.known_nodes[ nodes_cur_clients[i][1] ]
+					rnode = self.known_nodes[ nodes_max_clients[i][1] ]
+
+					msg = "{0:4d} [{1}] {2:{width}} |{3:4d} [{4}] {5:{width}} ".format(
+							lnode.clients, lnode.nid, lnode.name,
+							rnode.max_clients, rnode.nid, rnode.name,
+							width=max_name_len)
+					self.send_command_response(msg, response_target)
+
+				if nodes_limited:
+					msg = 'Im Channel werden maximal {} Knoten aufgelistet. Benutze eine private Nachricht, um mehr Knoten aufzulisten.'.format(config.PUBLIC_MAX_NODES)
+					self.send_command_response(msg, response_target)
+
 		elif command == "help":
 			self.send_command_response("status [<node>]     Status des Netzwerks oder eines Knotens anzeigen", response_target)
 			self.send_command_response("highscore [<node>]  Highscores des Netzwerks oder eines Knotens anzeigen", response_target)
 			self.send_command_response("nodes [<cols>]      Alle Knoten im Netz auflisten (ID und Name), in <cols> Spalten", response_target)
+			self.send_command_response("top [<num>]         Die <num> meistgenutzen Knoten auflisten (aktuell und Highscore)", response_target)
 			self.send_command_response("topic               Topic mit aktuellen Knotenzahlen aktualisieren (Text nach letztem | wird ersetzt)", response_target)
 			self.send_command_response("<node> kann ein Knoten-Name oder eine ID (MAC-Adresse) sein.", response_target)
 		else:

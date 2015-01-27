@@ -21,3 +21,6 @@ AUTH_MESSAGE = "identify password"
 
 # use "/msg chanserv topic <target> <topic" instead of "/topic" to set the topic
 TOPIC_USE_CHANSERV = True
+
+# maximum limit of nodes printed by the "top" command in public channels
+PUBLIC_MAX_NODES = 10
