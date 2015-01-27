@@ -55,6 +55,9 @@ class Node:
 		else:
 			return "[" + self.nid + "]"
 
+	def fullIdentifier(self):
+		return "{} [{}]".format(self.name, self.nid)
+
 class Highscore:
 	def __init__(self, key):
 		self.key       = key
@@ -190,11 +193,11 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 					if node:
 						if node.online:
 							self.send_command_response(
-									"Knoten {} [{}] ist online und hat {} Clients.".format(
-										node.name, node.nid, node.clients),
+									"Knoten {} ist online und hat {} Clients.".format(
+										node.fullIdentifier(), node.clients),
 									response_target)
 						else:
-							self.send_command_response("Knoten {} [{}] ist offline.".format(node.name, node.nid, node.clients), response_target)
+							self.send_command_response("Knoten {} ist offline.".format(node.fullIdentifier()), response_target)
 					else:
 						self.send_command_response("Es gibt keinen Knoten mit diesem Namen.", response_target)
 		elif command == "highscore":
@@ -220,8 +223,8 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 					node = self.find_node(cmdparts[1])
 					if node:
 						self.send_command_response(
-								"Knoten {} [{}] hatte bisher max. {} Clients (erreicht: {}).".format(
-									node.name, node.nid, node.max_clients,
+								"Knoten {} hatte bisher max. {} Clients (erreicht: {}).".format(
+									node.fullIdentifier(), node.max_clients,
 									time.strftime(config.TIME_FORMAT, time.localtime(node.max_clients_timestamp))),
 								response_target)
 					else:
