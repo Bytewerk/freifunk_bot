@@ -49,6 +49,12 @@ class Node:
 		else:
 			return False
 
+	def readableName(self):
+		if self.name:
+			return self.name
+		else:
+			return "[" + self.nid + "]"
+
 class Highscore:
 	def __init__(self, key):
 		self.key       = key
@@ -326,16 +332,16 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 						changed_nodes.append(nid)
 
 			for nid in new_nodes:
-				msg = "Neuer Knoten: {:s}".format(current_nodes[nid].name)
+				msg = "Neuer Knoten: {:s}".format(current_nodes[nid].readableName())
 				self.connection.notice(self.target, msg)
 
 			for nid in really_gone_nodes:
-				msg = "Knoten gelöscht: {:s}".format(self.known_nodes[nid].name)
+				msg = "Knoten gelöscht: {:s}".format(self.known_nodes[nid].readableName())
 				self.connection.notice(self.target, msg)
 
 			for nid in changed_nodes:
 				msg = "{:s} ist jetzt {}".format(
-						current_nodes[nid].name,
+						current_nodes[nid].readableName(),
 						"online" if current_nodes[nid].online else "offline")
 				self.connection.notice(self.target, msg)
 
@@ -354,7 +360,7 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			# per-node client highscore
 			for node in current_nodes.values():
 				if node.updateHighscore(db) and not firstRun:
-					msg = "Neuer Highscore: Knoten {:s} hat {:d} Clients!".format(node.name, node.max_clients)
+					msg = "Neuer Highscore: Knoten {:s} hat {:d} Clients!".format(node.readableName(), node.max_clients)
 					self.connection.notice(self.target, msg)
 
 			db.commit()
