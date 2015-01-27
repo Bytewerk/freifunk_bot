@@ -257,7 +257,11 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 					self.channel_topic[0:pos],
 					self.num_nodes_online,
 					self.num_nodes)
-			self.connection.topic(self.target, new_topic)
+
+			if config.TOPIC_USE_CHANSERV:
+				self.connection.privmsg("chanserv", "topic {} {}".format(self.target, new_topic))
+			else:
+				self.connection.topic(self.target, new_topic)
 		elif command == "help":
 			self.send_command_response("status [<node>]     Status des Netzwerks oder eines Knotens anzeigen", response_target)
 			self.send_command_response("highscore [<node>]  Highscores des Netzwerks oder eines Knotens anzeigen", response_target)
