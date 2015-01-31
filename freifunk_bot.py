@@ -96,6 +96,8 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 		self.num_nodes        = 0
 		self.num_nodes_online = 0
 
+		self.last_nodes_online = 0
+
 		self.channel_topic = ""
 
 		self.nodes_highscore        = Highscore('nodes')
@@ -401,6 +403,10 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 				self.connection.notice(self.target, msg)
 
 			# update global network status
+			self.last_nodes_online = self.num_nodes_online
+			self.last_nodes = self.num_nodes
+			self.last_clients = self.num_clients
+
 			self.num_nodes = len(current_nodes)
 			self.num_nodes_online = 0
 			self.num_clients = 0
@@ -441,8 +447,52 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			db.commit()
 			db.close()
 
+			# write a log of changes in the network
+			self.log_network_changes(current_nodes, new_nodes, really_gone_nodes)
+
 			self.known_nodes = current_nodes
 
+	def log_network_changes(self, current_nodes, new_nodes, gone_nodes):
+		if config.LOG_NODECOUNT:
+			with open(config.LOG_NODECOUNT, 'a') as logfile:
+				if self.num_nodes != self.last_nodes:
+					print("Number of nodes changed: {} -> {}".format(self.last_nodes, self.num_nodes))
+					logfile.write("{} {}\n".format(int(time.time()), self.num_nodes))
+
+		if config.LOG_ONLINENODECOUNT:
+			with open(config.LOG_ONLINENODECOUNT, 'a') as logfile:
+				if self.num_nodes_online != self.last_nodes_online:
+					print("Number of online nodes changed: {} -> {}".format(self.last_nodes_online, self.num_nodes_online))
+					logfile.write("{} {}\n".format(int(time.time()), self.num_nodes_online))
+
+		if config.LOG_TOTALCLIENTCOUNT:
+			with open(config.LOG_TOTALCLIENTCOUNT, 'a') as logfile:
+				if self.num_clients != self.last_clients:
+					print("Number of connected clients changed: {} -> {}".format(self.last_clients, self.num_clients))
+					logfile.write("{} {}\n".format(int(time.time()), self.num_clients))
+
+		if config.LOG_NODECLIENTCOUNT:
+			with open(config.LOG_NODECLIENTCOUNT, 'a') as logfile:
+				current_nids = set(current_nodes.keys())
+				known_nids = set(self.known_nodes.keys())
+				all_nids = current_nids | known_nids
+				for nid in all_nids:
+					clientcount = -1
+					if nid in new_nodes:
+						# new node
+						clientcount = current_nodes[nid].clients
+						nodename = current_nodes[nid].name
+					elif nid in gone_nodes:
+						# deleted node
+						clientcount = 0
+						nodename = self.known_nodes[nid].name
+					elif self.known_nodes[nid].clients != current_nodes[nid].clients:
+						clientcount = current_nodes[nid].clients
+						nodename = current_nodes[nid].name
+
+					if clientcount >= 0:
+						print("Number of clients for node {} changed: {}".format(nodename, clientcount))
+						logfile.write("{} {} {}\n".format(int(time.time()), nodename, clientcount))
 
 def main():
 	if len(sys.argv) != 4:

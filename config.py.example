@@ -24,3 +24,9 @@ TOPIC_USE_CHANSERV = True
 
 # maximum limit of nodes printed by the "top" command in public channels
 PUBLIC_MAX_NODES = 10
+
+# log files (set to None or '' to disable)
+LOG_NODECOUNT = 'logs/nodes.csv'
+LOG_ONLINENODECOUNT = 'logs/onlinenodes.csv'
+LOG_TOTALCLIENTCOUNT = 'logs/totalclients.csv'
+LOG_NODECLIENTCOUNT = 'logs/nodeclients.csv'
