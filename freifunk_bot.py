@@ -481,18 +481,28 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 					if nid in new_nodes:
 						# new node
 						clientcount = current_nodes[nid].clients
-						nodename = current_nodes[nid].name
 					elif nid in gone_nodes:
 						# deleted node
 						clientcount = 0
-						nodename = self.known_nodes[nid].name
 					elif self.known_nodes[nid].clients != current_nodes[nid].clients:
 						clientcount = current_nodes[nid].clients
-						nodename = current_nodes[nid].name
 
 					if clientcount >= 0:
-						print("Number of clients for node {} changed: {}".format(nodename, clientcount))
-						logfile.write("{} {} {}\n".format(int(time.time()), nodename, clientcount))
+						print("Number of clients for node {} changed: {}".format(nid, clientcount))
+						logfile.write("{} {} {}\n".format(int(time.time()), nid, clientcount))
+
+		if config.LOG_NODENAMES:
+			if not os.path.exists(config.LOG_NODENAMES):
+				# create the file with all current nodes
+				with open(config.LOG_NODENAMES, 'w') as nodefile:
+					for node in current_nodes.values():
+						nodefile.write("{} {}\n".format(node.nid, node.name))
+			else:
+				with open(config.LOG_NODENAMES, 'a') as nodefile:
+					for nid in new_nodes:
+						node = current_nodes[nid]
+						nodefile.write("{} {}\n".format(node.nid, node.name))
+
 
 def main():
 	if len(sys.argv) != 4:
