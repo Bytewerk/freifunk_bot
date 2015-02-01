@@ -31,3 +31,7 @@ LOG_ONLINENODECOUNT = 'logs/onlinenodes.csv'
 LOG_TOTALCLIENTCOUNT = 'logs/totalclients.csv'
 LOG_NODECLIENTCOUNT = 'logs/nodeclients.csv'
 LOG_NODENAMES = 'logs/nodenames.csv'
+
+# plot locations
+PLOT_DIR = '/tmp/plots'
+PLOT_HTML = '/tmp/plots.html'
