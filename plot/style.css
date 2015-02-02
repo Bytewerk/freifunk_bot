@@ -1,0 +1,50 @@
+body {
+	margin: 0;
+	padding: 0.25%;
+	text-align: center;
+	color: white;
+	background-color: #444;
+}
+
+div.history_box, div.jumplist {
+	width: 99.5%;
+	background-color: #888;
+	margin: 0 0 2% 0;
+	padding: 0.25%;
+	border-radius: 5%;
+}
+
+p.plot_line {
+	margin: 0 0 0.5% 0;
+	padding: 0;
+}
+
+span.plot {
+	margin: 0.25%;
+	padding: 0;
+	display: inline;
+}
+
+span.plot img {
+	width: 23.80%;
+	background-color: white;
+	display: inline-box;
+	border-radius: 5%;
+	padding: 0.25%;
+}
+
+div.jumplist {
+	background-color: #666;
+}
+
+span.jumpentry {
+	margin-right: 0.5em;
+}
+
+span.jumpentry a {
+	color: white;
+}
+
+span.jumpentry a:hover {
+	color: silver;
+}

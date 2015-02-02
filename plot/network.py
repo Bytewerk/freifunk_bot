@@ -20,7 +20,7 @@ for r in [0x00, 0x55, 0xaa]:
 			COLORS.append(cs)
 
 def plot(timestamp, ydata, ylabel, title, color, output_file):
-	f = p.figure(figsize=(4.5, 3))
+	f = p.figure(figsize=(4.5, 3.5))
 
 	p.step(timestamp, ydata, 'r', linewidth=2, color=color)
 
@@ -52,10 +52,56 @@ def plot(timestamp, ydata, ylabel, title, color, output_file):
 	else:
 		ticks = p.xticks()[0]
 		ticks = ticks[0:len(ticks):3]
-	textticks = [time.strftime('%m-%d\n%H:%M', time.gmtime(t)) for t in ticks]
+	textticks = [time.strftime('%y-%m-%d\n%H:%M', time.gmtime(t)) for t in ticks]
 
 	p.xticks(ticks, textticks)
-	f.savefig(output_file)
+	f.savefig(output_file, transparent=True, bbox_inches='tight')
+
+	p.close(f)
+
+def limitdata(timestamp, data, maxage):
+	out_timestamp = []
+	out_data = []
+
+	for i in range(len(timestamp)):
+		if timestamp[i] > (time.time() - maxage):
+			out_timestamp.append(timestamp[i])
+			out_data.append(data[i])
+
+	return out_timestamp, out_data
+
+def plot_limited(timestamp, ydata, ylabel, basetitle, color, base_output_file):
+	lim_timestamp, lim_data = limitdata(timestamp, ydata, 356*24*3600)
+	plot(lim_timestamp,
+	     lim_data,
+	     ylabel,
+	     '{} (1y)'.format(basetitle),
+	     color,
+	     os.path.join(config.PLOT_DIR, '{}_1year.svg'.format(base_output_file)))
+
+	lim_timestamp, lim_data = limitdata(timestamp, ydata, 30*24*3600)
+	plot(lim_timestamp,
+	     lim_data,
+	     ylabel,
+	     '{} (30d)'.format(basetitle),
+	     color,
+	     os.path.join(config.PLOT_DIR, '{}_30d.svg'.format(base_output_file)))
+
+	lim_timestamp, lim_data = limitdata(timestamp, ydata, 24*3600)
+	plot(lim_timestamp,
+	     lim_data,
+	     ylabel,
+	     '{} (24h)'.format(basetitle),
+	     color,
+	     os.path.join(config.PLOT_DIR, '{}_24h.svg'.format(base_output_file)))
+
+	lim_timestamp, lim_data = limitdata(timestamp, ydata, 3*3600)
+	plot(lim_timestamp,
+	     lim_data,
+	     ylabel,
+	     '{} (3h)'.format(basetitle),
+	     color,
+	     os.path.join(config.PLOT_DIR, '{}_3h.svg'.format(base_output_file)))
 
 # load node names
 nodenames = {}
@@ -74,12 +120,12 @@ with open(config.LOG_NODECOUNT, 'r') as logfile:
 		timestamp.append(int(data[0]))
 		nodes.append(int(data[1]))
 
-	plot(timestamp,
-	     nodes,
-	     'Knoten',
-	     'Knoten im Netzwerk',
-	     COLORS[0],
-	     os.path.join(config.PLOT_DIR, 'nodes.svg'))
+	plot_limited(timestamp,
+	             nodes,
+	             'Knoten',
+	             'Knoten im Netzwerk',
+	             COLORS[0],
+	             os.path.join(config.PLOT_DIR, 'nodes'))
 
 # global online nodes
 timestamp = []
@@ -91,12 +137,12 @@ with open(config.LOG_ONLINENODECOUNT, 'r') as logfile:
 		timestamp.append(int(data[0]))
 		nodes.append(int(data[1]))
 
-	plot(timestamp,
-	     nodes,
-	     'Knoten',
-	     'Knoten online',
-	     COLORS[0],
-	     os.path.join(config.PLOT_DIR, 'nodes_online.svg'))
+	plot_limited(timestamp,
+	             nodes,
+	             'Knoten',
+	             'Knoten online',
+	             COLORS[0],
+	             os.path.join(config.PLOT_DIR, 'nodes_online'))
 
 # global clients
 timestamp = []
@@ -108,12 +154,12 @@ with open(config.LOG_TOTALCLIENTCOUNT, 'r') as logfile:
 		timestamp.append(int(data[0]))
 		clients.append(int(data[1]))
 
-	plot(timestamp,
-	     clients,
-	     'Clients',
-	     'Clients im Netz',
-	     COLORS[0],
-	     os.path.join(config.PLOT_DIR, 'clients.svg'))
+	plot_limited(timestamp,
+	             clients,
+	             'Clients',
+	             'Clients im Netz',
+	             COLORS[0],
+	             os.path.join(config.PLOT_DIR, 'clients'))
 
 # clients for each node
 clientdata = {}
@@ -140,9 +186,9 @@ with open(config.LOG_NODECLIENTCOUNT, 'r') as logfile:
 
 		color = COLORS[zlib.crc32(bytes(nid, 'ascii')) % len(COLORS)]
 
-		plot(data['timestamp'],
-		     data['clients'],
-		     'Clients',
-		     'Clients an Knoten {}'.format(name),
-		     color,
-		     os.path.join(config.PLOT_DIR, 'clients_{}.svg'.format(nid)))
+		plot_limited(data['timestamp'],
+		             data['clients'],
+		             'Clients',
+		             'Clients an Knoten {}'.format(name),
+		             color,
+		             os.path.join(config.PLOT_DIR, 'clients_{}'.format(nid)))
