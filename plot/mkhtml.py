@@ -2,6 +2,7 @@
 # vim: noexpandtab ts=2 sw=2 sts=2
 
 import sys, os
+import time
 
 from glob import glob
 
@@ -52,6 +53,7 @@ for name in names:
 				name)
 htmlstring += '</p></div>'
 
+# generate node plot lines
 for name in names:
 	nid = nodenames[name]
 	if node_plot_exists(nid):
@@ -59,6 +61,9 @@ for name in names:
 				"Clients an {}".format(name),
 				nid,
 				os.path.join(pathprefix, 'clients_{}'.format(nid)))
+
+htmlstring += '<p class="date">Letzte Aktualisierung: {:s}</p>'.format(
+		time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
 
 with open('plot/template.html', 'r') as templatefile:
 	templatecontent = templatefile.read()
