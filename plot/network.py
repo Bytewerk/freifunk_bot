@@ -168,13 +168,16 @@ with open(config.LOG_NODECOUNT, 'r') as logfile:
 		timestamp.append(int(data[0]))
 		nodes.append(int(data[1]))
 
-	print("Plotting...")
-	plot_limited(timestamp,
-	             nodes,
-	             'Knoten',
-	             'Knoten im Netzwerk',
-	             COLORS[0],
-	             os.path.join(config.PLOT_DIR, 'nodes'))
+	if p.any(p.array(timestamp) > (time.time() - config.PLOT_SKIP_TIMEOUT)):
+		print("Plotting...")
+		plot_limited(timestamp,
+		             nodes,
+		             'Knoten',
+		             'Knoten im Netzwerk',
+		             COLORS[0],
+		             os.path.join(config.PLOT_DIR, 'nodes'))
+	else:
+		print("Skipped.")
 
 # global online nodes
 timestamp = []
@@ -187,13 +190,16 @@ with open(config.LOG_ONLINENODECOUNT, 'r') as logfile:
 		timestamp.append(int(data[0]))
 		nodes.append(int(data[1]))
 
-	print("Plotting...")
-	plot_limited(timestamp,
-	             nodes,
-	             'Knoten',
-	             'Knoten online',
-	             COLORS[0],
-	             os.path.join(config.PLOT_DIR, 'nodes_online'))
+	if p.any(p.array(timestamp) > (time.time() - config.PLOT_SKIP_TIMEOUT)):
+		print("Plotting...")
+		plot_limited(timestamp,
+		             nodes,
+		             'Knoten',
+		             'Knoten online',
+		             COLORS[0],
+		             os.path.join(config.PLOT_DIR, 'nodes_online'))
+	else:
+		print("Skipped.")
 
 # global clients
 timestamp = []
@@ -206,13 +212,16 @@ with open(config.LOG_TOTALCLIENTCOUNT, 'r') as logfile:
 		timestamp.append(int(data[0]))
 		clients.append(int(data[1]))
 
-	print("Plotting...")
-	plot_limited(timestamp,
-	             clients,
-	             'Clients',
-	             'Clients im Netz',
-	             COLORS[0],
-	             os.path.join(config.PLOT_DIR, 'clients'))
+	if p.any(p.array(timestamp) > (time.time() - config.PLOT_SKIP_TIMEOUT)):
+		print("Plotting...")
+		plot_limited(timestamp,
+		             clients,
+		             'Clients',
+		             'Clients im Netz',
+		             COLORS[0],
+		             os.path.join(config.PLOT_DIR, 'clients'))
+	else:
+		print("Skipped.")
 
 # clients for each node
 clientdata = {}
@@ -238,12 +247,15 @@ with open(config.LOG_NODECLIENTCOUNT, 'r') as logfile:
 		else:
 			name = '[' + nid + ']'
 
-		color = COLORS[zlib.crc32(bytes(nid, 'ascii')) % len(COLORS)]
+		if p.any(p.array(data['timestamp']) > (time.time() - config.PLOT_SKIP_TIMEOUT)):
+			color = COLORS[zlib.crc32(bytes(nid, 'ascii')) % len(COLORS)]
 
-		print("Plotting clients for node {} [{}]...".format(name, nid))
-		plot_limited(data['timestamp'],
-		             data['clients'],
-		             'Clients',
-		             'Clients an Knoten {}'.format(name),
-		             color,
-		             os.path.join(config.PLOT_DIR, 'clients_{}'.format(nid)))
+			print("Plotting clients for node {} [{}]...".format(name, nid))
+			plot_limited(data['timestamp'],
+			             data['clients'],
+			             'Clients',
+			             'Clients an Knoten {}'.format(name),
+			             color,
+			             os.path.join(config.PLOT_DIR, 'clients_{}'.format(nid)))
+		else:
+			print("Plots for node {} [{}] skipped.".format(name, nid))

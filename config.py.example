@@ -35,3 +35,6 @@ LOG_NODENAMES = 'logs/nodenames.csv'
 # plot locations
 PLOT_DIR = '/tmp/plots'
 PLOT_HTML = '/tmp/plots.html'
+
+# do only replot if there was an event less than this number of seconds ago
+PLOT_SKIP_TIMEOUT = 20*60
