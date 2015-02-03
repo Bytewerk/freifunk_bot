@@ -12,18 +12,17 @@ import config
 
 COLORS=[]
 
-for r in [0x00, 0x55, 0xaa]:
-	for g in [0x00, 0x55, 0xaa]:
-		for b in [0x00, 0x55, 0xaa]:
+for r in [0x20, 0x65, 0xaa]:
+	for g in [0x20, 0x65, 0xaa]:
+		for b in [0x20, 0x65, 0xaa]:
 			c = (r << 16) + (g << 8) + b
 			cs = '#{:06x}'.format(c)
 			COLORS.append(cs)
 
-def plot(timestamp, ydata, ylabel, title, color, output_file):
-	f = p.figure(figsize=(4.5, 3.5))
+def init_plot():
+	return p.figure(figsize=(4.5, 3.5))
 
-	p.step(timestamp, ydata, 'r', linewidth=2, color=color)
-
+def finalize_plot(f, timestamp, ylabel, title, output_file):
 	p.axis('tight')
 
 	p.ylabel(ylabel)
@@ -59,6 +58,52 @@ def plot(timestamp, ydata, ylabel, title, color, output_file):
 
 	p.close(f)
 
+def plot(timestamp, ydata, ylabel, title, color, output_file):
+	f = init_plot()
+
+	p.step(timestamp, ydata, linewidth=2, color=color)
+
+	finalize_plot(f, timestamp, ylabel, title, output_file)
+
+def plot_minmax(timestamp, ydata, ylabel, binsize, title, color, output_file):
+	f = init_plot()
+
+	# sort data into bins with a width of binsize
+	tsbins = p.multiply(p.floor(p.divide(timestamp, binsize)), binsize);
+
+	bins = {}
+	for i in range(len(timestamp)):
+		if tsbins[i] not in bins.keys():
+			bins[ tsbins[i] ] = [ ydata[i] ]
+		else:
+			bins[ tsbins[i] ].append(ydata[i])
+
+	sorted_ts = sorted(tsbins)
+
+	binsmax = {}
+	for ts, data in bins.items():
+		binsmax[ts] = max(data)
+
+	binsmax_data = []
+	for k in sorted_ts:
+		binsmax_data.append(binsmax[k])
+
+	binsmin = {}
+	for ts, data in bins.items():
+		binsmin[ts] = min(data)
+
+	binsmin_data = []
+	for k in sorted_ts:
+		binsmin_data.append(binsmin[k])
+
+	p.plot(sorted_ts, binsmax_data,
+	       sorted_ts, binsmin_data,
+	       linewidth=2, color=color)
+
+	p.fill_between(sorted_ts, binsmin_data, binsmax_data, color=color, alpha=0.2)
+
+	finalize_plot(f, sorted_ts, ylabel, title, output_file)
+
 def limitdata(timestamp, data, maxage):
 	out_timestamp = []
 	out_data = []
@@ -72,17 +117,19 @@ def limitdata(timestamp, data, maxage):
 
 def plot_limited(timestamp, ydata, ylabel, basetitle, color, base_output_file):
 	lim_timestamp, lim_data = limitdata(timestamp, ydata, 356*24*3600)
-	plot(lim_timestamp,
+	plot_minmax(lim_timestamp,
 	     lim_data,
 	     ylabel,
+	     24*3600,
 	     '{} (1y)'.format(basetitle),
 	     color,
 	     os.path.join(config.PLOT_DIR, '{}_1year.svg'.format(base_output_file)))
 
 	lim_timestamp, lim_data = limitdata(timestamp, ydata, 30*24*3600)
-	plot(lim_timestamp,
+	plot_minmax(lim_timestamp,
 	     lim_data,
 	     ylabel,
+	     3*3600,
 	     '{} (30d)'.format(basetitle),
 	     color,
 	     os.path.join(config.PLOT_DIR, '{}_30d.svg'.format(base_output_file)))
