@@ -114,12 +114,14 @@ with open(config.LOG_NODENAMES, 'r') as nodefile:
 timestamp = []
 nodes = []
 with open(config.LOG_NODECOUNT, 'r') as logfile:
+	print("Reading data for nodes...")
 	for line in logfile:
 		data = line.strip().split(' ')
 
 		timestamp.append(int(data[0]))
 		nodes.append(int(data[1]))
 
+	print("Plotting...")
 	plot_limited(timestamp,
 	             nodes,
 	             'Knoten',
@@ -131,12 +133,14 @@ with open(config.LOG_NODECOUNT, 'r') as logfile:
 timestamp = []
 nodes = []
 with open(config.LOG_ONLINENODECOUNT, 'r') as logfile:
+	print("Reading data for online nodes...")
 	for line in logfile:
 		data = line.strip().split(' ')
 
 		timestamp.append(int(data[0]))
 		nodes.append(int(data[1]))
 
+	print("Plotting...")
 	plot_limited(timestamp,
 	             nodes,
 	             'Knoten',
@@ -148,12 +152,14 @@ with open(config.LOG_ONLINENODECOUNT, 'r') as logfile:
 timestamp = []
 clients = []
 with open(config.LOG_TOTALCLIENTCOUNT, 'r') as logfile:
+	print("Reading data for global clients...")
 	for line in logfile:
 		data = line.strip().split(' ')
 
 		timestamp.append(int(data[0]))
 		clients.append(int(data[1]))
 
+	print("Plotting...")
 	plot_limited(timestamp,
 	             clients,
 	             'Clients',
@@ -165,6 +171,7 @@ with open(config.LOG_TOTALCLIENTCOUNT, 'r') as logfile:
 clientdata = {}
 
 with open(config.LOG_NODECLIENTCOUNT, 'r') as logfile:
+	print("Reading data for node clients...")
 	for line in logfile:
 		data = line.strip().split(' ')
 
@@ -186,6 +193,7 @@ with open(config.LOG_NODECLIENTCOUNT, 'r') as logfile:
 
 		color = COLORS[zlib.crc32(bytes(nid, 'ascii')) % len(COLORS)]
 
+		print("Plotting clients for node {} [{}]...".format(name, nid))
 		plot_limited(data['timestamp'],
 		             data['clients'],
 		             'Clients',
