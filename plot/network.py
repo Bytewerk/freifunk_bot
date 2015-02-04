@@ -80,27 +80,24 @@ def plot_minmax(timestamp, ydata, ylabel, binsize, title, color, output_file):
 
 	sorted_ts = sorted(tsbins)
 
-	binsmax = {}
+	binsdata = {}
 	for ts, data in bins.items():
-		binsmax[ts] = max(data)
+		binsdata[ts] = (min(data), p.mean(data), max(data))
 
-	binsmax_data = []
+	binsdata_ordered = {'min': [], 'avg': [], 'max': []}
 	for k in sorted_ts:
-		binsmax_data.append(binsmax[k])
+		binsdata_ordered['min'].append(binsdata[k][0])
+		binsdata_ordered['avg'].append(binsdata[k][1])
+		binsdata_ordered['max'].append(binsdata[k][2])
 
-	binsmin = {}
-	for ts, data in bins.items():
-		binsmin[ts] = min(data)
-
-	binsmin_data = []
-	for k in sorted_ts:
-		binsmin_data.append(binsmin[k])
-
-	p.plot(sorted_ts, binsmax_data,
-	       sorted_ts, binsmin_data,
+	p.plot(sorted_ts, binsdata_ordered['min'],
+	       sorted_ts, binsdata_ordered['max'],
 	       linewidth=2, color=color)
 
-	p.fill_between(sorted_ts, binsmin_data, binsmax_data, color=color, alpha=0.2)
+	p.plot(sorted_ts, binsdata_ordered['avg'],
+	       linewidth=2, color=color, linestyle='dashed', alpha=0.6)
+
+	p.fill_between(sorted_ts, binsdata_ordered['min'], binsdata_ordered['max'], color=color, alpha=0.2)
 
 	finalize_plot(f, sorted_ts, ylabel, title, output_file)
 
