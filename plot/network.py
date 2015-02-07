@@ -20,7 +20,9 @@ for r in [0x20, 0x65, 0xaa]:
 			COLORS.append(cs)
 
 def init_plot():
-	return p.figure(figsize=(4.5, 3.5))
+	fig = p.figure(figsize=(4.5, 3.5))
+	ax = fig.add_axes([0.15, 0.19, 0.8, 0.73])
+	return fig
 
 def finalize_plot(f, timestamp, ylabel, title, output_file):
 	p.axis('tight')
@@ -53,8 +55,12 @@ def finalize_plot(f, timestamp, ylabel, title, output_file):
 		ticks = ticks[0:len(ticks):3]
 	textticks = [time.strftime('%y-%m-%d\n%H:%M', time.gmtime(t)) for t in ticks]
 
+	# enforce y range
+	if len(timestamp) == 0:
+		p.ylim([0, 1])
+
 	p.xticks(ticks, textticks)
-	f.savefig(output_file, transparent=True, bbox_inches='tight')
+	f.savefig(output_file, transparent=True)
 
 	p.close(f)
 
