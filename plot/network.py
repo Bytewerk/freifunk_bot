@@ -35,10 +35,12 @@ def finalize_plot(f, timestamp, ylabel, title, output_file):
 	# adjust xticks
 	if len(timestamp) >= 2:
 		r = max(timestamp) - min(timestamp)
-		if r > 30*86400:
+		if r > 180*86400:
+			tickdist = 90*86400
+		elif r > 30*86400:
 			tickdist = 30*86400
-		elif r > 7*86400:
-			tickdist = 7*86400
+		elif r > 5*86400:
+			tickdist = 5*86400
 		elif r > 86400:
 			tickdist = 86400
 		elif r > 12*3600:
@@ -48,7 +50,7 @@ def finalize_plot(f, timestamp, ylabel, title, output_file):
 		else:
 			tickdist = 3600
 
-		start = p.floor(min(timestamp)/tickdist)*tickdist
+		start = (p.floor(min(timestamp)/tickdist) + 1)*tickdist
 		ticks = p.arange(start, max(timestamp), tickdist)
 	else:
 		ticks = p.xticks()[0]
