@@ -104,6 +104,10 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 		self.clients_highscore      = Highscore('clients')
 		self.nodes_online_highscore = Highscore('nodes_online')
 
+		# for rate limiter
+		self.ratelimitMessages = 0
+		self.nextMessageTime = 0
+
 		# load the global highscores
 		db = sqlite3.connect(config.DATABASE)
 
@@ -157,8 +161,29 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 
 		self.handle_message(msg, source, True)
 
+	def ratelimit(self):
+		now = time.time()
+
+		if now < self.nextMessageTime:
+			# bot is sending too fast
+			self.ratelimitMessages += 1
+
+			print("RATELIMITER: {} messages too fast.".format(self.ratelimitMessages))
+
+			if self.ratelimitMessages > config.RATELIMIT_MESSAGES:
+				time.sleep(self.nextMessageTime - now)
+		else:
+			self.ratelimitMessages = 0
+
+		self.nextMessageTime = time.time() + config.RATELIMIT_INTERVAL
+
 	def send_command_response(self, message, target):
+		self.ratelimit()
 		self.connection.privmsg(target, message)
+
+	def send_notice(self, message):
+		self.ratelimit()
+		self.connection.notice(self.target, message)
 
 	def find_node(self, identifier):
 		for node in self.known_nodes.values():
@@ -390,17 +415,17 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 
 			for nid in new_nodes:
 				msg = "Neuer Knoten: {:s}".format(current_nodes[nid].readableName())
-				self.connection.notice(self.target, msg)
+				self.send_notice(msg)
 
 			for nid in really_gone_nodes:
 				msg = "Knoten gelöscht: {:s}".format(self.known_nodes[nid].readableName())
-				self.connection.notice(self.target, msg)
+				self.send_notice(msg)
 
 			for nid in changed_nodes:
 				msg = "{:s} ist jetzt {}".format(
 						current_nodes[nid].readableName(),
 						"online" if current_nodes[nid].online else "offline")
-				self.connection.notice(self.target, msg)
+				self.send_notice(msg)
 
 			# update global network status
 			self.last_nodes_online = self.num_nodes_online
@@ -422,7 +447,7 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			for node in current_nodes.values():
 				if node.updateHighscore(db) and not firstRun:
 					msg = "Neuer Highscore: Knoten {:s} hat {:d} Clients!".format(node.readableName(), node.max_clients)
-					self.connection.notice(self.target, msg)
+					self.send_notice(msg)
 
 			db.commit()
 
@@ -430,19 +455,19 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			if self.nodes_highscore.update(self.num_nodes):
 				self.nodes_highscore.save(db)
 				msg = "Neuer Highscore: {:d} registrierte Knoten!".format(self.num_nodes)
-				self.connection.notice(self.target, msg)
+				self.send_notice(msg)
 
 			# nodes online
 			if self.nodes_online_highscore.update(self.num_nodes_online):
 				self.nodes_online_highscore.save(db)
 				msg = "Neuer Highscore: {:d} Knoten online!".format(self.num_nodes_online)
-				self.connection.notice(self.target, msg)
+				self.send_notice(msg)
 
 			# clients
 			if self.clients_highscore.update(self.num_clients):
 				self.clients_highscore.save(db)
 				msg = "Neuer Highscore: {:d} Clients verbunden!".format(self.num_clients)
-				self.connection.notice(self.target, msg)
+				self.send_notice(msg)
 
 			db.commit()
 			db.close()

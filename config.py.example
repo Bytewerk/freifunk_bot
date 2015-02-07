@@ -19,6 +19,10 @@ TIME_FORMAT = '%Y-%m-%d %H:%M'
 AUTH_TARGET = "nickserv"
 AUTH_MESSAGE = "identify password"
 
+# rate limiting
+RATELIMIT_MESSAGES = 4
+RATELIMIT_INTERVAL = 0.5
+
 # use "/msg chanserv topic <target> <topic" instead of "/topic" to set the topic
 TOPIC_USE_CHANSERV = True
 
