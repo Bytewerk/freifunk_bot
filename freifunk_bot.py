@@ -136,8 +136,8 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			self.timer.start()
 
 	def on_disconnect(self, connection, event):
-		self.timer.stop()
-		sys.exit(0)
+		print("DISCONNECTED! Starting reconnect timer")
+		threading.Timer(config.RECONNECT_INTERVAL, connection.reconnect).start()
 
 	def on_currenttopic(self, connection, event):
 		print("CURRENTTOPIC {}: {}".format(event.source, event.arguments))

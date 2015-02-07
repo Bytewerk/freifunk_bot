@@ -19,6 +19,9 @@ TIME_FORMAT = '%Y-%m-%d %H:%M'
 AUTH_TARGET = "nickserv"
 AUTH_MESSAGE = "identify password"
 
+# reconnect interval
+RECONNECT_INTERVAL = 30
+
 # rate limiting
 RATELIMIT_MESSAGES = 4
 RATELIMIT_INTERVAL = 0.5
