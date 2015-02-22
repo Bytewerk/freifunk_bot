@@ -20,8 +20,8 @@ for r in [0x20, 0x65, 0xaa]:
 			COLORS.append(cs)
 
 def init_plot():
-	fig = p.figure(figsize=(4.5, 3.5))
-	ax = fig.add_axes([0.15, 0.19, 0.8, 0.73])
+	fig = p.figure(figsize=(4.5, 4.0))
+	ax = fig.add_axes([0.15, 0.19, 0.8, 0.67])
 	return fig
 
 def finalize_plot(f, timestamp, ylabel, title, output_file):
@@ -120,12 +120,14 @@ def limitdata(timestamp, data, maxage):
 	return out_timestamp, out_data
 
 def plot_limited(timestamp, ydata, ylabel, basetitle, color, base_output_file):
+	datetext = time.strftime('%Y-%m-%d %H:%M')
+
 	lim_timestamp, lim_data = limitdata(timestamp, ydata, 356*24*3600)
 	plot_minmax(lim_timestamp,
 	     lim_data,
 	     ylabel,
 	     24*3600,
-	     '{} (1y)'.format(basetitle),
+	     '{}\n(1y @{})'.format(basetitle, datetext),
 	     color,
 	     os.path.join(config.PLOT_DIR, '{}_1year.svg'.format(base_output_file)))
 
@@ -134,7 +136,7 @@ def plot_limited(timestamp, ydata, ylabel, basetitle, color, base_output_file):
 	     lim_data,
 	     ylabel,
 	     3*3600,
-	     '{} (30d)'.format(basetitle),
+	     '{}\n(30d @{})'.format(basetitle, datetext),
 	     color,
 	     os.path.join(config.PLOT_DIR, '{}_30d.svg'.format(base_output_file)))
 
@@ -142,7 +144,7 @@ def plot_limited(timestamp, ydata, ylabel, basetitle, color, base_output_file):
 	plot(lim_timestamp,
 	     lim_data,
 	     ylabel,
-	     '{} (24h)'.format(basetitle),
+	     '{}\n(24h @{})'.format(basetitle, datetext),
 	     color,
 	     os.path.join(config.PLOT_DIR, '{}_24h.svg'.format(base_output_file)))
 
@@ -150,7 +152,7 @@ def plot_limited(timestamp, ydata, ylabel, basetitle, color, base_output_file):
 	plot(lim_timestamp,
 	     lim_data,
 	     ylabel,
-	     '{} (3h)'.format(basetitle),
+	     '{}\n(3h @{})'.format(basetitle, datetext),
 	     color,
 	     os.path.join(config.PLOT_DIR, '{}_3h.svg'.format(base_output_file)))
 
@@ -177,7 +179,7 @@ with open(config.LOG_NODECOUNT, 'r') as logfile:
 		plot_limited(timestamp,
 		             nodes,
 		             'Knoten',
-		             'Knoten im Netzwerk',
+		             'Registrierte Knoten',
 		             COLORS[0],
 		             os.path.join(config.PLOT_DIR, 'nodes'))
 	else:
@@ -258,7 +260,7 @@ with open(config.LOG_NODECLIENTCOUNT, 'r') as logfile:
 			plot_limited(data['timestamp'],
 			             data['clients'],
 			             'Clients',
-			             'Clients an Knoten {}'.format(name),
+			             'Clients an {}'.format(name),
 			             color,
 			             os.path.join(config.PLOT_DIR, 'clients_{}'.format(nid)))
 		else:
