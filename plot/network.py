@@ -35,27 +35,26 @@ def finalize_plot(f, timestamp, ylabel, title, output_file):
 	# adjust xticks
 	if len(timestamp) >= 2:
 		r = max(timestamp) - min(timestamp)
-		if r > 180*86400:
-			tickdist = 90*86400
-		elif r > 30*86400:
-			tickdist = 30*86400
-		elif r > 5*86400:
-			tickdist = 5*86400
-		elif r > 86400:
-			tickdist = 86400
-		elif r > 12*3600:
+		if r < 4*3600: # 3 hour plot
+			tickdist = 1800
+			timeformat = '%H:%M'
+		elif r < 25*3600: # 24 hour plot
 			tickdist = 6*3600
-		elif r > 4*3600:
-			tickdist = 3*3600
-		else:
-			tickdist = 3600
+			timeformat = '%m-%d\n%H:%M'
+		elif r < 32*86400: # 30 day plot
+			tickdist = 4*86400
+			timeformat = '%a\n%d'
+		else: # 1 year plot
+			tickdist = 60*86400
+			timeformat = '%m-%d\n%Y'
 
 		start = (p.floor(min(timestamp)/tickdist) + 1)*tickdist
 		ticks = p.arange(start, max(timestamp), tickdist)
 	else:
 		ticks = p.xticks()[0]
 		ticks = ticks[0:len(ticks):3]
-	textticks = [time.strftime('%y-%m-%d\n%H:%M', time.gmtime(t)) for t in ticks]
+		timeformat = '%Y-%m-%d\n%H:%M'
+	textticks = [time.strftime(timeformat, time.localtime(t)) for t in ticks]
 
 	# enforce y range
 	if len(timestamp) == 0:
