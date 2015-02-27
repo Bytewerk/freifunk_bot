@@ -366,9 +366,9 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 
 	def do_freifunk_cycle(self):
 		try:
-			r = requests.get(config.JSON_URI)
-		except:
-			print("Request failed")
+			r = requests.get(config.JSON_URI, timeout=config.REQUEST_TIMEOUT)
+		except Exception as e:
+			print("Request failed: {}".format(str(e)))
 			return
 
 		with self.known_nodes_lock:

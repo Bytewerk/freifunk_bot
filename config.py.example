@@ -6,6 +6,9 @@ JSON_URI = 'http://localhost:8000/nodes.json'
 # Interval for reloading nodes.json
 UPDATE_INTERVAL = 60
 
+# number of seconds to wait for a response from JSON_URI
+REQUEST_TIMEOUT = 10
+
 # number of update cycles a node must be gone to be announced as "deleted"
 DELETE_TIMEOUT = 3
 
