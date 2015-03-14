@@ -126,7 +126,7 @@ def plot_limited(timestamp, ydata, ylabel, basetitle, color, base_output_file):
 	plot_minmax(lim_timestamp,
 	     lim_data,
 	     ylabel,
-	     24*3600,
+	     config.PLOT_ACC_TIME_1Y,
 	     '{}\n(1y @{})'.format(basetitle, datetext),
 	     color,
 	     os.path.join(config.PLOT_DIR, '{}_1year.svg'.format(base_output_file)))
@@ -135,7 +135,7 @@ def plot_limited(timestamp, ydata, ylabel, basetitle, color, base_output_file):
 	plot_minmax(lim_timestamp,
 	     lim_data,
 	     ylabel,
-	     3*3600,
+	     config.PLOT_ACC_TIME_30D,
 	     '{}\n(30d @{})'.format(basetitle, datetext),
 	     color,
 	     os.path.join(config.PLOT_DIR, '{}_30d.svg'.format(base_output_file)))

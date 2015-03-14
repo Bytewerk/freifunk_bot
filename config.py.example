@@ -48,3 +48,7 @@ PLOT_HTML = '/tmp/plots.html'
 
 # do only replot if there was an event less than this number of seconds ago
 PLOT_SKIP_TIMEOUT = 20*60
+
+# time interval vor min/max/average accumulation in long-term plots
+PLOT_ACC_TIME_1Y  = 3*24*3600
+PLOT_ACC_TIME_30D =   12*3600
