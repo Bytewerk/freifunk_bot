@@ -408,10 +408,13 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 					current_nodes[nid] = n
 
 			changed_nodes = []
+			renamed_nodes = []
 			for nid, node in current_nodes.items():
 				if nid in self.known_nodes.keys():
 					if self.known_nodes[nid].online != current_nodes[nid].online:
 						changed_nodes.append(nid)
+					if self.known_nodes[nid].name != current_nodes[nid].name:
+						renamed_nodes.append(nid)
 
 			if config.NOTIFY_NEW_NODES:
 				for nid in new_nodes:
@@ -429,6 +432,12 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 							current_nodes[nid].readableName(),
 							"online" if current_nodes[nid].online else "offline")
 					self.send_notice(msg)
+
+			if config.NOTIFY_RENAMED_NODES:
+				for nid in renamed_nodes:
+					msg = "Knoten {:s} heißt jetzt {:s}".format(self.known_nodes[nid].readableName(), current_nodes[nid].readableName())
+					self.send_notice(msg)
+
 
 			# update global network status
 			self.last_nodes_online = self.num_nodes_online
@@ -479,11 +488,11 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			db.close()
 
 			# write a log of changes in the network
-			self.log_network_changes(current_nodes, new_nodes, really_gone_nodes)
+			self.log_network_changes(current_nodes, new_nodes, really_gone_nodes, renamed_nodes)
 
 			self.known_nodes = current_nodes
 
-	def log_network_changes(self, current_nodes, new_nodes, gone_nodes):
+	def log_network_changes(self, current_nodes, new_nodes, gone_nodes, renamed_nodes):
 		if config.LOG_NODECOUNT:
 			with open(config.LOG_NODECOUNT, 'a') as logfile:
 				if self.num_nodes != self.last_nodes:
@@ -530,7 +539,7 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 						nodefile.write("{} {}\n".format(node.nid, node.name))
 			else:
 				with open(config.LOG_NODENAMES, 'a') as nodefile:
-					for nid in new_nodes:
+					for nid in set(new_nodes + renamed_nodes):
 						node = current_nodes[nid]
 						nodefile.write("{} {}\n".format(node.nid, node.name))
 
