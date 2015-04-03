@@ -457,7 +457,7 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 
 			# per-node client highscore
 			for node in current_nodes.values():
-				if node.updateHighscore(db) and not firstRun:
+				if node.updateHighscore(db) and not firstRun and node.max_clients > 0:
 					msg = "Neuer Highscore: Knoten {:s} hat {:d} Clients!".format(node.readableName(), node.max_clients)
 					self.send_notice(msg)
 
