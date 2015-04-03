@@ -413,19 +413,22 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 					if self.known_nodes[nid].online != current_nodes[nid].online:
 						changed_nodes.append(nid)
 
-			for nid in new_nodes:
-				msg = "Neuer Knoten: {:s}".format(current_nodes[nid].readableName())
-				self.send_notice(msg)
+			if config.NOTIFY_NEW_NODES:
+				for nid in new_nodes:
+					msg = "Neuer Knoten: {:s}".format(current_nodes[nid].readableName())
+					self.send_notice(msg)
 
-			for nid in really_gone_nodes:
-				msg = "Knoten gelöscht: {:s}".format(self.known_nodes[nid].readableName())
-				self.send_notice(msg)
+			if config.NOTIFY_DELETED_NODES:
+				for nid in really_gone_nodes:
+					msg = "Knoten gelöscht: {:s}".format(self.known_nodes[nid].readableName())
+					self.send_notice(msg)
 
-			for nid in changed_nodes:
-				msg = "{:s} ist jetzt {}".format(
-						current_nodes[nid].readableName(),
-						"online" if current_nodes[nid].online else "offline")
-				self.send_notice(msg)
+			if config.NOTIFY_ONLINE_STATUS:
+				for nid in changed_nodes:
+					msg = "{:s} ist jetzt {}".format(
+							current_nodes[nid].readableName(),
+							"online" if current_nodes[nid].online else "offline")
+					self.send_notice(msg)
 
 			# update global network status
 			self.last_nodes_online = self.num_nodes_online
@@ -454,20 +457,23 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			# nodes registered
 			if self.nodes_highscore.update(self.num_nodes):
 				self.nodes_highscore.save(db)
-				msg = "Neuer Highscore: {:d} registrierte Knoten!".format(self.num_nodes)
-				self.send_notice(msg)
+				if config.NOTIFY_NET_HIGHSCORES:
+					msg = "Neuer Highscore: {:d} registrierte Knoten!".format(self.num_nodes)
+					self.send_notice(msg)
 
 			# nodes online
 			if self.nodes_online_highscore.update(self.num_nodes_online):
 				self.nodes_online_highscore.save(db)
-				msg = "Neuer Highscore: {:d} Knoten online!".format(self.num_nodes_online)
-				self.send_notice(msg)
+				if config.NOTIFY_NET_HIGHSCORES:
+					msg = "Neuer Highscore: {:d} Knoten online!".format(self.num_nodes_online)
+					self.send_notice(msg)
 
 			# clients
 			if self.clients_highscore.update(self.num_clients):
 				self.clients_highscore.save(db)
-				msg = "Neuer Highscore: {:d} Clients verbunden!".format(self.num_clients)
-				self.send_notice(msg)
+				if config.NOTIFY_NODE_HIGHSCORES:
+					msg = "Neuer Highscore: {:d} Clients verbunden!".format(self.num_clients)
+					self.send_notice(msg)
 
 			db.commit()
 			db.close()
