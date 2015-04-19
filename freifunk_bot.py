@@ -13,10 +13,10 @@ import config
 
 class Node:
 	def __init__(self, json_obj):
-		self.nid = json_obj['id']
-		self.name = json_obj['name']
+		self.nid = json_obj['nodeinfo']['network']['mac']
+		self.name = json_obj['nodeinfo']['hostname']
 		self.online = json_obj['flags']['online']
-		self.clients = json_obj['clientcount']
+		self.clients = json_obj['statistics']['clients']
 		self.max_clients = -1
 		self.max_clients_timestamp = -1
 		self.delete_counter = 0
@@ -375,10 +375,13 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			json = r.json()
 
 			current_nodes = {}
-			for node in json['nodes']:
-				n = Node(node)
-
-				current_nodes[n.nid] = n
+			for node in json['nodes'].values():
+				try:
+					n = Node(node)
+					current_nodes[n.nid] = n
+				except KeyError as e:
+					# node is missing relevant information for tracking
+					pass
 
 			# check if this is the first run
 			firstRun = not self.known_nodes
