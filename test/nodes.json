@@ -1,270 +1,3034 @@
 {
-  "nodes": [
-    {
-      "name": "Hildegard-Knef-Str3-01", 
-      "firmware": "v2014.4+5", 
+  "timestamp": "2015-04-19T13:45:01",
+  "nodes": {
+    "0418d6e43898": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "06:1b:d7:e4:38:98",
+            "04:18:d6:e5:38:98"
+          ],
+          "mac": "04:18:d6:e4:38:98",
+          "addresses": [
+            "fe80:0:0:0:618:d6ff:fee4:3898",
+            "2a03:2260:116:0:618:d6ff:fee4:3898"
+          ]
+        },
+        "hostname": "Freifunk-JensXW",
+        "system": {
+          "site_code": "ffin"
+        },
+        "hardware": {
+          "model": "Ubiquiti Loco M XW"
+        },
+        "node_id": "0418d6e43898",
+        "location": {
+          "latitude": 48.775188343049,
+          "altitude": 390,
+          "longitude": 11.401035189629
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": false,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "exp20150411+1a2d988",
+            "base": "gluon-v2014.4-170-g1a2d988"
+          },
+          "fastd": {
+            "version": "v17",
+            "enabled": false
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 156938.46,
+        "memory_usage": 0.4422136757708103,
+        "clients": 4,
+        "rootfs_usage": 0.069128787878788,
+        "loadavg": 0.11,
+        "gateway": "ffin-gw1"
+      },
       "flags": {
-        "gateway": false, 
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "10feedcda596": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "12:01:ee:cd:a5:96",
+            "12:02:ed:cd:a5:96"
+          ],
+          "mac": "10:fe:ed:cd:a5:96",
+          "addresses": [
+            "2a03:2260:116:0:12fe:edff:fecd:a596",
+            "fe80:0:0:0:12fe:edff:fecd:a596"
+          ]
+        },
+        "hostname": "sqozz1",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v8"
+        },
+        "node_id": "10feedcda596",
+        "location": {
+          "latitude": 48.658726698057,
+          "longitude": 11.209664940834
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "experimental"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 2520266.82,
+        "memory_usage": 0.8708246708246709,
+        "clients": 2,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.1,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "14cc2062efe2": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "16:d0:20:62:ef:e2",
+            "16:cf:21:62:ef:e2"
+          ],
+          "mac": "14:cc:20:62:ef:e2",
+          "addresses": [
+            "fe80:0:0:0:16cc:20ff:fe62:efe2",
+            "2a03:2260:116:0:16cc:20ff:fe62:efe2"
+          ]
+        },
+        "hostname": "freifunk-14cc2062efe2",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "14cc2062efe2",
+        "location": {
+          "latitude": 48.765490261895,
+          "longitude": 11.428114771843
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 54969.9,
+        "memory_usage": 0.7736659736659737,
+        "clients": 1,
+        "rootfs_usage": 0.3625,
+        "loadavg": 0.11,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "14cc20709df0": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "16:d0:20:70:9d:f0",
+            "16:cf:21:70:9d:f0"
+          ],
+          "mac": "14:cc:20:70:9d:f0",
+          "addresses": [
+            "2a03:2260:116:0:16cc:20ff:fe70:9df0",
+            "fe80:0:0:0:16cc:20ff:fe70:9df0"
+          ]
+        },
+        "hostname": "freifunk-14cc20709df0",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "14cc20709df0",
+        "location": {
+          "latitude": 48.736295,
+          "longitude": 11.413432
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 59637.91,
+        "memory_usage": 0.9167013167013167,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "14cc20713826": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "16:d0:20:71:38:26",
+            "16:cf:21:71:38:26",
+            "14:cc:20:71:38:27"
+          ],
+          "mac": "14:cc:20:71:38:26",
+          "addresses": [
+            "fe80:0:0:0:16cc:20ff:fe71:3826",
+            "2a03:2260:116:0:16cc:20ff:fe71:3826"
+          ]
+        },
+        "hostname": "DontSwitchRohrbach",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "14cc20713826",
+        "location": {
+          "latitude": 48.613421,
+          "longitude": 11.570422
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 194328.17,
+        "memory_usage": 0.8645876645876646,
+        "clients": 1,
+        "rootfs_usage": 0.3625,
+        "loadavg": 0.14,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "14cc209391be": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "16:d0:20:93:91:be",
+            "16:cf:21:93:91:be",
+            "14:cc:20:93:91:bf"
+          ],
+          "mac": "14:cc:20:93:91:be",
+          "addresses": [
+            "fe80:0:0:0:16cc:20ff:fe93:91be",
+            "2a03:2260:116:0:16cc:20ff:fe93:91be"
+          ]
+        },
+        "hostname": "DontSwitchZuchering",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "14cc209391be",
+        "location": {
+          "latitude": 48.708129,
+          "longitude": 11.406102
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 762173.53,
+        "memory_usage": 0.8277200277200277,
+        "clients": 0,
+        "rootfs_usage": 0.3625,
+        "loadavg": 0.04,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "14cc2097fe0c": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "16:d0:20:97:fe:0c",
+            "16:cf:21:97:fe:0c"
+          ],
+          "mac": "14:cc:20:97:fe:0c",
+          "addresses": [
+            "2a03:2260:116:0:16cc:20ff:fe97:fe0c",
+            "fe80:0:0:0:16cc:20ff:fe97:fe0c"
+          ]
+        },
+        "hostname": "Richi-1043",
+        "hardware": {
+          "model": "TP-Link TL-WR1043N/ND v2"
+        },
+        "node_id": "14cc2097fe0c",
+        "location": {
+          "latitude": 48.775608,
+          "longitude": 11.415751
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "experimental"
+          },
+          "firmware": {
+            "release": "v2014.4+14",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 94784.5,
+        "memory_usage": 0.43528721392710434,
+        "clients": 2,
+        "rootfs_usage": 0.063344594594595,
+        "loadavg": 0.09,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "14cc2097feac": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "16:d0:20:97:fe:ac",
+            "16:cf:21:97:fe:ac",
+            "14:cc:20:97:fe:ad"
+          ],
+          "mac": "14:cc:20:97:fe:ac",
+          "addresses": [
+            "fe80:0:0:0:16cc:20ff:fe97:feac",
+            "2a03:2260:116:0:16cc:20ff:fe97:feac"
+          ]
+        },
+        "hostname": "neal-StWh-01",
+        "hardware": {
+          "model": "TP-Link TL-WR1043N/ND v2"
+        },
+        "node_id": "14cc2097feac",
+        "location": {
+          "latitude": 48.757876857608,
+          "longitude": 11.442684531212
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "beta"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 3007728.67,
+        "memory_usage": 0.4394601290995631,
+        "clients": 3,
+        "rootfs_usage": 0.065878378378378,
+        "loadavg": 0.19,
+        "gateway": "ffin-gw2"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "14cc20b0f3fa": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "16:d0:20:b0:f3:fa",
+            "16:cf:21:b0:f3:fa"
+          ],
+          "mac": "14:cc:20:b0:f3:fa",
+          "addresses": [
+            "fe80:0:0:0:16cc:20ff:feb0:f3fa",
+            "2a03:2260:116:0:16cc:20ff:feb0:f3fa"
+          ]
+        },
+        "hostname": "FreiFunk-Herschel",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "14cc20b0f3fa",
+        "location": {
+          "latitude": 48.775057539251,
+          "longitude": 11.401056647301
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 60895.18,
+        "memory_usage": 0.9036729036729036,
+        "clients": 1,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.02,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "24a43c98b315": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "24:a4:3c:98:b3:15",
+            "26:a7:3d:98:b3:15"
+          ],
+          "mac": "24:a4:3c:98:b3:15",
+          "addresses": [
+            "2a03:2260:116:0:26a4:3cff:fe98:b315",
+            "fe80:0:0:0:26a4:3cff:fe98:b315"
+          ]
+        },
+        "hostname": "neal-outdoorplus",
+        "system": {
+          "site_code": "ffin"
+        },
+        "hardware": {
+          "model": "Ubiquiti UniFiAP Outdoor+"
+        },
+        "node_id": "24a43c98b315",
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": false,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "exp20150411+1a2d988",
+            "base": "gluon-v2014.4-170-g1a2d988"
+          },
+          "fastd": {
+            "version": "v17",
+            "enabled": false
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 690763.49,
+        "memory_usage": 0.41692197379571083,
+        "clients": 0,
+        "rootfs_usage": 0.040441176470588,
+        "loadavg": 0.16,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "24a43cf22519": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "26:a8:3c:f2:25:19",
+            "26:a7:3d:f2:25:19"
+          ],
+          "mac": "24:a4:3c:f2:25:19",
+          "addresses": [
+            "2a03:2260:116:0:26a4:3cff:fef2:2519",
+            "fe80:0:0:0:26a4:3cff:fef2:2519"
+          ]
+        },
+        "hostname": "GeierB-02",
+        "hardware": {
+          "model": "Ubiquiti Bullet M"
+        },
+        "node_id": "24a43cf22519",
+        "location": {
+          "latitude": 48.751925,
+          "longitude": 11.42384
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 60061.64,
+        "memory_usage": 0.43280954554345696,
+        "clients": 2,
+        "rootfs_usage": 0.069962686567164,
+        "loadavg": 0.01,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "30b5c26e8ded": {
+      "nodeinfo": {
+        "hardware": {
+          "model": "TP-Link TL-WDR4300 v1"
+        },
+        "node_id": "30b5c26e8ded",
+        "network": {
+          "mesh_interfaces": [
+            "32:b9:c2:6e:8d:ed",
+            "32:b8:c3:6e:8d:ed",
+            "32:b8:c4:6e:8d:ed"
+          ],
+          "mac": "30:b5:c2:6e:8d:ed",
+          "addresses": [
+            "fe80:0:0:0:32b5:c2ff:fe6e:8ded",
+            "2a03:2260:116:0:32b5:c2ff:fe6e:8ded"
+          ]
+        },
+        "hostname": "Auf_der_Schanz_1",
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": false,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+6",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 4145765.21,
+        "memory_usage": 0.2547417751179507,
+        "clients": 1,
+        "rootfs_usage": 0.063344594594595,
+        "loadavg": 0.31,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "6466b3877ce0": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "66:6a:b3:87:7c:e0",
+            "66:69:b4:87:7c:e0"
+          ],
+          "mac": "64:66:b3:87:7c:e0",
+          "addresses": [
+            "fe80:0:0:0:6666:b3ff:fe87:7ce0",
+            "2a03:2260:116:0:6666:b3ff:fe87:7ce0"
+          ]
+        },
+        "hostname": "Schillerstrasse-Mesh1",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v8"
+        },
+        "node_id": "6466b3877ce0",
+        "location": {
+          "latitude": 48.776248901797,
+          "longitude": 11.435914635658
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 59593.01,
+        "memory_usage": 0.9136521136521136,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.05,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "6466b3ded32c": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "66:69:b5:de:d3:2c",
+            "66:69:b4:de:d3:2c",
+            "66:6a:b3:de:d3:2c",
+            "66:67:b3:de:d3:2c"
+          ],
+          "mac": "64:66:b3:de:d3:2c",
+          "addresses": [
+            "fe80:0:0:0:6666:b3ff:fede:d32c",
+            "2a03:2260:116:0:6666:b3ff:fede:d32c"
+          ]
+        },
+        "hostname": "Richi-4900",
+        "hardware": {
+          "model": "TP-Link TL-WDR4900 v1"
+        },
+        "node_id": "6466b3ded32c",
+        "location": {
+          "latitude": 48.775676202856,
+          "longitude": 11.415781974792
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "experimental"
+          },
+          "firmware": {
+            "release": "v2014.4+14",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 40051.68,
+        "memory_usage": 0.30187784522003036,
+        "clients": 4,
+        "rootfs_usage": 0.039473684210526,
+        "loadavg": 0.1,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "6872511877c3": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "6a:75:52:18:77:c3",
+            "68:72:51:19:77:c3"
+          ],
+          "mac": "68:72:51:18:77:c3",
+          "addresses": [
+            "2a03:2260:116:0:6a72:51ff:fe18:77c3",
+            "fe80:0:0:0:6a72:51ff:fe18:77c3"
+          ]
+        },
+        "hostname": "Richi-M2",
+        "hardware": {
+          "model": "Ubiquiti Nanostation M"
+        },
+        "node_id": "6872511877c3",
+        "location": {
+          "latitude": 48.775699,
+          "longitude": 11.415741
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "experimental"
+          },
+          "firmware": {
+            "release": "v2014.4+14",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": false
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 93603.91,
+        "memory_usage": 0.9017325017325017,
+        "clients": 1,
+        "rootfs_usage": 0.069962686567164,
+        "loadavg": 0.02,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "7444018daa4a": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "76:48:01:8d:aa:4a",
+            "76:47:02:8d:aa:4a",
+            "76:47:03:8d:aa:4a"
+          ],
+          "mac": "74:44:01:8d:aa:4a",
+          "addresses": [
+            "fe80:0:0:0:7644:1ff:fe8d:aa4a",
+            "2a03:2260:116:0:7644:1ff:fe8d:aa4a"
+          ]
+        },
+        "hostname": "pat_WNDR",
+        "system": {
+          "site_code": "ffin"
+        },
+        "hardware": {
+          "model": "NETGEAR WNDR3800"
+        },
+        "node_id": "7444018daa4a",
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": false,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "pre2015.1+exp20150313",
+            "base": "gluon-v2014.4-107-g4a304ab"
+          },
+          "fastd": {
+            "version": "v17",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 1220542.39,
+        "memory_usage": 0.25274690478452233,
+        "clients": 0,
+        "rootfs_usage": 0.038584183673469,
+        "loadavg": 0,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-19T08:03:01"
+    },
+    "b0487abe9912": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "b2:4c:7a:be:99:12",
+            "b2:4b:7b:be:99:12"
+          ],
+          "mac": "b0:48:7a:be:99:12",
+          "addresses": [
+            "2a03:2260:116:0:b248:7aff:febe:9912",
+            "fe80:0:0:0:b248:7aff:febe:9912"
+          ]
+        },
+        "hostname": "cfr34k",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v7"
+        },
+        "node_id": "b0487abe9912",
+        "location": {
+          "latitude": 48.737123028895,
+          "longitude": 11.413351893425
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 59838.63,
+        "memory_usage": 0.8672210672210672,
+        "clients": 1,
+        "rootfs_usage": 0.40972222222222,
+        "loadavg": 0.05,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c04a0038f222": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c2:4e:00:38:f2:22",
+            "c2:4d:01:38:f2:22",
+            "c2:4d:02:38:f2:22"
+          ],
+          "mac": "c0:4a:00:38:f2:22",
+          "addresses": [
+            "fe80:0:0:0:c24a:ff:fe38:f222",
+            "2a03:2260:116:0:c24a:ff:fe38:f222"
+          ]
+        },
+        "hostname": "Faltbootclub",
+        "hardware": {
+          "model": "TP-Link TL-WDR3600 v1"
+        },
+        "node_id": "c04a0038f222",
+        "location": {
+          "latitude": 48.759910276393,
+          "longitude": 11.455644965172
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 59532.92,
+        "memory_usage": 0.265444412779836,
+        "clients": 1,
+        "rootfs_usage": 0.063344594594595,
+        "loadavg": 0.14,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1f2d5bf2": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:2d:5b:f2",
+            "c6:71:20:2d:5b:f2"
+          ],
+          "mac": "c4:6e:1f:2d:5b:f2",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fe2d:5bf2",
+            "fe80:0:0:0:c66e:1fff:fe2d:5bf2"
+          ]
+        },
+        "hostname": "Oelbaum",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1f2d5bf2",
+        "location": {
+          "latitude": 48.761537,
+          "longitude": 11.422504
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 58566.36,
+        "memory_usage": 0.9136521136521136,
+        "clients": 1,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.19,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1f3b90b4": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:3b:90:b4",
+            "c6:71:20:3b:90:b4"
+          ],
+          "mac": "c4:6e:1f:3b:90:b4",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fe3b:90b4",
+            "fe80:0:0:0:c66e:1fff:fe3b:90b4"
+          ]
+        },
+        "hostname": "StWh-Hildegard-Knef-03",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1f3b90b4",
+        "location": {
+          "latitude": 48.757993560391,
+          "longitude": 11.442781090736
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "beta"
+          },
+          "firmware": {
+            "release": "v2014.4+14",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 95627.56,
+        "memory_usage": 0.8878724878724878,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.1,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1f41fd1a": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:71:20:41:fd:1a",
+            "c4:6e:1f:41:fd:1b",
+            "c6:72:1f:41:fd:1a"
+          ],
+          "mac": "c4:6e:1f:41:fd:1a",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fe41:fd1a",
+            "fe80:0:0:0:c66e:1fff:fe41:fd1a"
+          ]
+        },
+        "hostname": "StWh-Hildegard-Knef-02",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1f41fd1a",
+        "location": {
+          "latitude": 48.758085507847,
+          "longitude": 11.442861557007
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "beta"
+          },
+          "firmware": {
+            "release": "v2014.4+14",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 93998.7,
+        "memory_usage": 0.9112959112959113,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.08,
+        "gateway": "ffin-gw2"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1f878374": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:71:20:87:83:74"
+          ],
+          "mac": "c4:6e:1f:87:83:74",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fe87:8374",
+            "fe80:0:0:0:c66e:1fff:fe87:8374"
+          ]
+        },
+        "hostname": "Schillerstrasse-Mesh3",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1f878374",
+        "location": {
+          "latitude": 48.776217085361,
+          "longitude": 11.435957551003
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": false
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 1966.92,
+        "memory_usage": 0.8354816354816355,
+        "clients": 2,
+        "rootfs_usage": 0.3625,
+        "loadavg": 0.01,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1f879d3e": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:87:9d:3e",
+            "c6:71:20:87:9d:3e"
+          ],
+          "mac": "c4:6e:1f:87:9d:3e",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fe87:9d3e",
+            "fe80:0:0:0:c66e:1fff:fe87:9d3e"
+          ]
+        },
+        "hostname": "Leonardis",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1f879d3e",
+        "location": {
+          "latitude": 48.748964207842,
+          "longitude": 11.433200240135
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 60246.7,
+        "memory_usage": 0.9114345114345115,
+        "clients": 3,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.08,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fa2bf7a": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:a2:bf:7a",
+            "c6:71:20:a2:bf:7a",
+            "c4:6e:1f:a2:bf:7a"
+          ],
+          "mac": "c4:6e:1f:a2:bf:7a",
+          "addresses": [
+            "fe80:0:0:0:c66e:1fff:fea2:bf7a",
+            "2a03:2260:116:0:c66e:1fff:fea2:bf7a"
+          ]
+        },
+        "hostname": "StWh-Hildegard-Knef-07",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fa2bf7a",
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "firmware": {
+            "release": "v2014.4+15",
+            "base": "gluon-v2014.4"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "clients": 0
+      },
+      "flags": {
+        "gateway": false,
         "online": false
-      }, 
-      "clientcount": 0, 
-      "geo": [
-        48.758085507847, 
-        11.442861557007
-      ], 
-      "id": "c4:6e:1f:41:fd:1a"
-    }, 
-    {
-      "name": "bytewerk-dev", 
-      "firmware": "v2014.4+5", 
+      },
+      "lastseen": "2015-04-19T03:21:01",
+      "firstseen": "2015-04-19T03:02:01"
+    },
+    "c46e1fa2c066": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:a2:c0:66",
+            "c6:71:20:a2:c0:66",
+            "c4:6e:1f:a2:c0:66"
+          ],
+          "mac": "c4:6e:1f:a2:c0:66",
+          "addresses": [
+            "fe80:0:0:0:c66e:1fff:fea2:c066",
+            "2a03:2260:116:0:c66e:1fff:fea2:c066"
+          ]
+        },
+        "hostname": "DJK",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fa2c066",
+        "location": {
+          "latitude": 48.746219359193,
+          "longitude": 11.421988606453
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 1688349.24,
+        "memory_usage": 0.8539154539154539,
+        "clients": 7,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.1,
+        "gateway": "ffin-gw1"
+      },
       "flags": {
-        "gateway": false, 
+        "gateway": false,
         "online": true
-      }, 
-      "clientcount": 1, 
-      "geo": null, 
-      "id": "e8:94:f6:51:af:ba"
-    }, 
-    {
-      "name": "SPD", 
-      "firmware": "v2014.4+4", 
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fbd4dd4": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:bd:4d:d4",
+            "c6:71:20:bd:4d:d4"
+          ],
+          "mac": "c4:6e:1f:bd:4d:d4",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:febd:4dd4",
+            "fe80:0:0:0:c66e:1fff:febd:4dd4"
+          ]
+        },
+        "hostname": "chromsound",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fbd4dd4",
+        "location": {
+          "latitude": 48.77375,
+          "longitude": 11.419329
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 61209.16,
+        "memory_usage": 0.9032571032571033,
+        "clients": 3,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0,
+        "gateway": "ffin-gw1"
+      },
       "flags": {
-        "gateway": false, 
+        "gateway": false,
         "online": true
-      }, 
-      "clientcount": 0, 
-      "geo": [
-        48.76581085, 
-        11.43056631
-      ], 
-      "id": "c4:6e:1f:e8:0a:68"
-    }, 
-    {
-      "name": "ffin-gw2", 
-      "firmware": "Debian", 
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fc72d92": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:71:20:c7:2d:92",
+            "c6:72:1f:c7:2d:92"
+          ],
+          "mac": "c4:6e:1f:c7:2d:92",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fec7:2d92",
+            "fe80:0:0:0:c66e:1fff:fec7:2d92"
+          ]
+        },
+        "hostname": "Pat",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fc72d92",
+        "location": {
+          "latitude": 48.762382095505,
+          "longitude": 11.518998742104
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 19244.91,
+        "memory_usage": 0.9053361053361053,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.01,
+        "gateway": "ffin-gw1"
+      },
       "flags": {
-        "gateway": true, 
+        "gateway": false,
         "online": true
-      }, 
-      "clientcount": 1, 
-      "geo": null, 
-      "id": "ba:d1:de:af:00:03"
-    }, 
-    {
-      "name": "fusselkater", 
-      "firmware": "v2014.4+4", 
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-19T08:04:01"
+    },
+    "c46e1fe7c400": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e7:c4:00",
+            "c4:6e:1f:e7:c4:01",
+            "c6:71:20:e7:c4:00"
+          ],
+          "mac": "c4:6e:1f:e7:c4:00",
+          "addresses": [
+            "fe80:0:0:0:c66e:1fff:fee7:c400",
+            "2a03:2260:116:0:c66e:1fff:fee7:c400"
+          ]
+        },
+        "hostname": "bytewerk",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe7c400",
+        "location": {
+          "latitude": 48.770857495624,
+          "longitude": 11.381776928902
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "beta"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 1009868.79,
+        "memory_usage": 0.8855162855162855,
+        "clients": 4,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0,
+        "gateway": "ffin-gw1"
+      },
       "flags": {
-        "gateway": false, 
+        "gateway": false,
         "online": true
-      }, 
-      "clientcount": 1, 
-      "geo": [
-        48.744255, 
-        11.602303
-      ], 
-      "id": "e8:94:f6:4b:81:d2"
-    }, 
-    {
-      "name": "sqozz1", 
-      "firmware": "v2014.4+5", 
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe80a68": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:0a:68",
+            "c6:71:20:e8:0a:68"
+          ],
+          "mac": "c4:6e:1f:e8:0a:68",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fee8:a68",
+            "fe80:0:0:0:c66e:1fff:fee8:a68"
+          ]
+        },
+        "hostname": "SPD",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe80a68",
+        "location": {
+          "latitude": 48.76581085,
+          "longitude": 11.43056631
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 58148.62,
+        "memory_usage": 0.9130977130977131,
+        "clients": 0,
+        "rootfs_usage": 0.3625,
+        "loadavg": 0.01,
+        "gateway": "ffin-gw1"
+      },
       "flags": {
-        "gateway": false, 
+        "gateway": false,
         "online": true
-      }, 
-      "clientcount": 0, 
-      "geo": [
-        48.658726698057, 
-        11.209664940834
-      ], 
-      "id": "10:fe:ed:cd:a5:96"
-    }, 
-    {
-      "name": "chromsound", 
-      "firmware": "v2014.4+4", 
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe82b40": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:2b:40",
+            "c6:71:20:e8:2b:40"
+          ],
+          "mac": "c4:6e:1f:e8:2b:40",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fee8:2b40",
+            "fe80:0:0:0:c66e:1fff:fee8:2b40"
+          ]
+        },
+        "hostname": "schaeffbraeustr19",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe82b40",
+        "location": {
+          "latitude": 48.761777412798,
+          "longitude": 11.423265337944
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 57911.11,
+        "memory_usage": 0.9058905058905059,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0,
+        "gateway": "ffin-gw1"
+      },
       "flags": {
-        "gateway": false, 
+        "gateway": false,
         "online": true
-      }, 
-      "clientcount": 1, 
-      "geo": [
-        48.77375, 
-        11.419329
-      ], 
-      "id": "c4:6e:1f:bd:4d:d4"
-    }, 
-    {
-      "name": "ffin-gw1", 
-      "firmware": "Debian", 
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe82e5a": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:71:20:e8:2e:5a",
+            "c6:72:1f:e8:2e:5a",
+            "c4:6e:1f:e8:2e:5a"
+          ],
+          "mac": "c4:6e:1f:e8:2e:5a",
+          "addresses": [
+            "fe80:0:0:0:c66e:1fff:fee8:2e5a",
+            "2a03:2260:116:0:c66e:1fff:fee8:2e5a"
+          ]
+        },
+        "hostname": "StWh-Hildegard-Knef-05",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe82e5a",
+        "location": {
+          "latitude": 48.757915758566,
+          "longitude": 11.442571878433
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+14",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 40106.76,
+        "memory_usage": 0.9348579348579349,
+        "clients": 2,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.1,
+        "gateway": "ffin-gw2"
+      },
       "flags": {
-        "gateway": true, 
+        "gateway": false,
         "online": true
-      }, 
-      "clientcount": 1, 
-      "geo": null, 
-      "id": "ba:d1:de:af:00:02"
-    }, 
-    {
-      "name": "ffin-web", 
-      "firmware": "Debian", 
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe8302c": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:30:2c",
+            "c6:71:20:e8:30:2c"
+          ],
+          "mac": "c4:6e:1f:e8:30:2c",
+          "addresses": [
+            "fe80:0:0:0:c66e:1fff:fee8:302c",
+            "2a03:2260:116:0:c66e:1fff:fee8:302c"
+          ]
+        },
+        "hostname": "Ratschhaus",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe8302c",
+        "location": {
+          "latitude": 48.762081523139,
+          "longitude": 11.425362825293
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 60365.04,
+        "memory_usage": 0.9264033264033265,
+        "clients": 8,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.11,
+        "gateway": "ffin-gw1"
+      },
       "flags": {
-        "gateway": false, 
+        "gateway": false,
         "online": true
-      }, 
-      "clientcount": 0, 
-      "geo": null, 
-      "id": "ba:d1:de:af:00:10"
-    }, 
-    {
-      "name": "bytewerk", 
-      "firmware": "v2014.4+5", 
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe83084": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:30:84",
+            "c6:71:20:e8:30:84"
+          ],
+          "mac": "c4:6e:1f:e8:30:84",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fee8:3084",
+            "fe80:0:0:0:c66e:1fff:fee8:3084"
+          ]
+        },
+        "hostname": "Helin-Doener",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe83084",
+        "location": {
+          "latitude": 48.761592,
+          "longitude": 11.427248
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 60972.59,
+        "memory_usage": 0.9103257103257103,
+        "clients": 0,
+        "rootfs_usage": 0.3625,
+        "loadavg": 0.13,
+        "gateway": "ffin-gw1"
+      },
       "flags": {
-        "gateway": false, 
+        "gateway": false,
         "online": true
-      }, 
-      "clientcount": 1, 
-      "geo": [
-        48.77084846038, 
-        11.381868124008
-      ], 
-      "id": "c4:6e:1f:e7:c4:00"
-    }, 
-    {
-      "name": "cfr34k", 
-      "firmware": null, 
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe830a4": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:30:a4",
+            "c6:71:20:e8:30:a4"
+          ],
+          "mac": "c4:6e:1f:e8:30:a4",
+          "addresses": [
+            "fe80:0:0:0:c66e:1fff:fee8:30a4",
+            "2a03:2260:116:0:c66e:1fff:fee8:30a4"
+          ]
+        },
+        "hostname": "freifunk-c46e1fe830a4",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe830a4",
+        "location": {
+          "latitude": 48.765486725979,
+          "longitude": 11.428066492081
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 1973642.93,
+        "memory_usage": 0.874012474012474,
+        "clients": 1,
+        "rootfs_usage": 0.3625,
+        "loadavg": 0.02,
+        "gateway": "ffin-gw1"
+      },
       "flags": {
-        "gateway": false, 
-        "online": false
-      }, 
-      "clientcount": 0, 
-      "geo": [
-        48.73724, 
-        11.41367
-      ], 
-      "id": "b0:48:7a:be:99:12"
-    }, 
-    {
-      "name": "esclear", 
-      "firmware": null, 
-      "flags": {
-        "gateway": false, 
+        "gateway": false,
         "online": true
-      }, 
-      "clientcount": 0, 
-      "geo": [
-        48.767127, 
-        11.396362
-      ], 
-      "id": "24:a4:3c:f8:5c:15"
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe834b8": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:34:b8",
+            "c6:71:20:e8:34:b8"
+          ],
+          "mac": "c4:6e:1f:e8:34:b8",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fee8:34b8",
+            "fe80:0:0:0:c66e:1fff:fee8:34b8"
+          ]
+        },
+        "hostname": "E-Wirt",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe834b8",
+        "location": {
+          "latitude": 48.764212601326,
+          "longitude": 11.418405175209
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 31346.98,
+        "memory_usage": 0.8713790713790714,
+        "clients": 6,
+        "rootfs_usage": 0.3625,
+        "loadavg": 0.06,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe834c2": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:34:c2",
+            "c6:71:20:e8:34:c2",
+            "c4:6e:1f:e8:34:c2"
+          ],
+          "mac": "c4:6e:1f:e8:34:c2",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fee8:34c2",
+            "fe80:0:0:0:c66e:1fff:fee8:34c2"
+          ]
+        },
+        "hostname": "StWh-Hildegard-Knef-06",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe834c2",
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+14",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 93896.55,
+        "memory_usage": 0.8494802494802495,
+        "clients": 1,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.22,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe83bf2": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:3b:f2",
+            "c6:71:20:e8:3b:f2"
+          ],
+          "mac": "c4:6e:1f:e8:3b:f2",
+          "addresses": [
+            "fe80:0:0:0:c66e:1fff:fee8:3bf2",
+            "2a03:2260:116:0:c66e:1fff:fee8:3bf2"
+          ]
+        },
+        "hostname": "StWh-Hildegard-Knef-04",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe83bf2",
+        "location": {
+          "latitude": 48.757657597101,
+          "longitude": 11.443172693253
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 855454.86,
+        "memory_usage": 0.88995148995149,
+        "clients": 3,
+        "rootfs_usage": 0.375,
+        "loadavg": 0.33,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe83e1c": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:3e:1c",
+            "c6:71:20:e8:3e:1c"
+          ],
+          "mac": "c4:6e:1f:e8:3e:1c",
+          "addresses": [
+            "fe80:0:0:0:c66e:1fff:fee8:3e1c",
+            "2a03:2260:116:0:c66e:1fff:fee8:3e1c"
+          ]
+        },
+        "hostname": "coffee",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe83e1c",
+        "location": {
+          "latitude": 48.73214,
+          "longitude": 11.40325
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 61268.21,
+        "memory_usage": 0.9283437283437284,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.01,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe83e8e": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:3e:8e",
+            "c6:71:20:e8:3e:8e"
+          ],
+          "mac": "c4:6e:1f:e8:3e:8e",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fee8:3e8e",
+            "fe80:0:0:0:c66e:1fff:fee8:3e8e"
+          ]
+        },
+        "hostname": "hk",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe83e8e",
+        "location": {
+          "latitude": 48.817693,
+          "longitude": 11.4151289
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 241.09,
+        "memory_usage": 0.9262647262647262,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.06,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe83fb8": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:3f:b8",
+            "c6:71:20:e8:3f:b8"
+          ],
+          "mac": "c4:6e:1f:e8:3f:b8",
+          "addresses": [
+            "fe80:0:0:0:c66e:1fff:fee8:3fb8",
+            "2a03:2260:116:0:c66e:1fff:fee8:3fb8"
+          ]
+        },
+        "hostname": "nicoles-company.com",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe83fb8",
+        "location": {
+          "latitude": 48.770859852667,
+          "longitude": 11.381556987762
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 50530.56,
+        "memory_usage": 0.9093555093555094,
+        "clients": 1,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.1,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe83fec": {
+      "nodeinfo": {
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe83fec",
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:3f:ec",
+            "c6:71:20:e8:3f:ec"
+          ],
+          "mac": "c4:6e:1f:e8:3f:ec",
+          "addresses": [
+            "fe80:0:0:0:c66e:1fff:fee8:3fec",
+            "2a03:2260:116:0:c66e:1fff:fee8:3fec"
+          ]
+        },
+        "hostname": "sqozz2",
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+6",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 3790209.34,
+        "memory_usage": 0.8626472626472627,
+        "clients": 1,
+        "rootfs_usage": 0.3625,
+        "loadavg": 0.04,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe89842": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:98:42",
+            "c6:71:20:e8:98:42",
+            "c4:6e:1f:e8:98:43"
+          ],
+          "mac": "c4:6e:1f:e8:98:42",
+          "addresses": [
+            "2a03:2260:116:0:c66e:1fff:fee8:9842",
+            "fe80:0:0:0:c66e:1fff:fee8:9842"
+          ]
+        },
+        "hostname": "inpiraten.de",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe89842",
+        "location": {
+          "latitude": 48.76997360331,
+          "longitude": 11.411490440369
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 61390.57,
+        "memory_usage": 0.911988911988912,
+        "clients": 0,
+        "rootfs_usage": 0.3625,
+        "loadavg": 0,
+        "gateway": "ffin-gw2"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "c46e1fe89e3c": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "c6:72:1f:e8:9e:3c",
+            "c6:71:20:e8:9e:3c"
+          ],
+          "mac": "c4:6e:1f:e8:9e:3c",
+          "addresses": [
+            "fe80:0:0:0:c66e:1fff:fee8:9e3c",
+            "2a03:2260:116:0:c66e:1fff:fee8:9e3c"
+          ]
+        },
+        "hostname": "megazin",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "c46e1fe89e3c",
+        "location": {
+          "latitude": 48.7642862,
+          "longitude": 11.4194087
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 59587.71,
+        "memory_usage": 0.8070686070686071,
+        "clients": 2,
+        "rootfs_usage": 0.3625,
+        "loadavg": 0.02,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "e894f64b81d2": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "ea:98:f6:4b:81:d2",
+            "ea:97:f7:4b:81:d2"
+          ],
+          "mac": "e8:94:f6:4b:81:d2",
+          "addresses": [
+            "2a03:2260:116:0:ea94:f6ff:fe4b:81d2",
+            "fe80:0:0:0:ea94:f6ff:fe4b:81d2"
+          ]
+        },
+        "hostname": "RainbowDash",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "e894f64b81d2",
+        "location": {
+          "latitude": 48.744255,
+          "longitude": 11.602303
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "experimental"
+          },
+          "firmware": {
+            "release": "v2014.4+14",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 42066.51,
+        "memory_usage": 0.8446292446292446,
+        "clients": 3,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.01,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "e894f66d56a8": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "ea:98:f6:6d:56:a8",
+            "ea:97:f7:6d:56:a8"
+          ],
+          "mac": "e8:94:f6:6d:56:a8",
+          "addresses": [
+            "fe80:0:0:0:ea94:f6ff:fe6d:56a8",
+            "2a03:2260:116:0:ea94:f6ff:fe6d:56a8"
+          ]
+        },
+        "hostname": "hawking",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "e894f66d56a8",
+        "location": {
+          "latitude": 48.548267144826,
+          "longitude": 11.276323199272
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 58499.88,
+        "memory_usage": 0.8706860706860706,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "e894f6782f20": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "ea:98:f6:78:2f:20",
+            "ea:97:f7:78:2f:20"
+          ],
+          "mac": "e8:94:f6:78:2f:20",
+          "addresses": [
+            "2a03:2260:116:0:ea94:f6ff:fe78:2f20",
+            "fe80:0:0:0:ea94:f6ff:fe78:2f20"
+          ]
+        },
+        "hostname": "Freifunk-JensDev",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "e894f6782f20",
+        "location": {
+          "latitude": 49.59686065,
+          "longitude": 10.9501504898
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 59039.96,
+        "memory_usage": 0.9107415107415108,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "e894f6aaeb6e": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "ea:98:f6:aa:eb:6e",
+            "e8:94:f6:aa:eb:6e",
+            "ea:97:f7:aa:eb:6e"
+          ],
+          "mac": "e8:94:f6:aa:eb:6e",
+          "addresses": [
+            "2a03:2260:116:0:ea94:f6ff:feaa:eb6e",
+            "fe80:0:0:0:ea94:f6ff:feaa:eb6e"
+          ]
+        },
+        "hostname": "Freifunk-Jens",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v8"
+        },
+        "node_id": "e894f6aaeb6e",
+        "location": {
+          "latitude": 48.775155,
+          "longitude": 11.401013
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 57971.15,
+        "memory_usage": 0.9058905058905059,
+        "clients": 1,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.05,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "e8de27b766b8": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "ea:e1:28:b7:66:b8"
+          ],
+          "mac": "e8:de:27:b7:66:b8",
+          "addresses": [
+            "2a03:2260:116:0:eade:27ff:feb7:66b8",
+            "fe80:0:0:0:eade:27ff:feb7:66b8"
+          ]
+        },
+        "hostname": "Schillerstrasse-Mesh2",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "e8de27b766b8",
+        "location": {
+          "latitude": 48.776733216174,
+          "longitude": 11.436080932617
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": false
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 59949.47,
+        "memory_usage": 0.8968814968814969,
+        "clients": 1,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.02,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "e8de27dd675a": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "ea:e2:27:dd:67:5a",
+            "ea:e1:28:dd:67:5a"
+          ],
+          "mac": "e8:de:27:dd:67:5a",
+          "addresses": [
+            "2a03:2260:116:0:eade:27ff:fedd:675a",
+            "fe80:0:0:0:eade:27ff:fedd:675a"
+          ]
+        },
+        "hostname": "smgnet",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "e8de27dd675a",
+        "location": {
+          "latitude": 48.721496,
+          "longitude": 11.437186
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 60171.72,
+        "memory_usage": 0.9351351351351351,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.27,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "e8de27dd676a": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "ea:e2:27:dd:67:6a",
+            "ea:e1:28:dd:67:6a"
+          ],
+          "mac": "e8:de:27:dd:67:6a",
+          "addresses": [
+            "2a03:2260:116:0:eade:27ff:fedd:676a",
+            "fe80:0:0:0:eade:27ff:fedd:676a"
+          ]
+        },
+        "hostname": "Dojo",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "e8de27dd676a",
+        "location": {
+          "latitude": 48.76231,
+          "longitude": 11.42304
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 9841.88,
+        "memory_usage": 0.9280665280665281,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.03,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-19T10:53:01"
+    },
+    "e8de27f92ae0": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "ea:e2:27:f9:2a:e0",
+            "ea:e1:28:f9:2a:e0"
+          ],
+          "mac": "e8:de:27:f9:2a:e0",
+          "addresses": [
+            "2a03:2260:116:0:eade:27ff:fef9:2ae0",
+            "fe80:0:0:0:eade:27ff:fef9:2ae0"
+          ]
+        },
+        "hostname": "AnonymousAlSan",
+        "hardware": {
+          "model": "TP-Link TL-WR841N/ND v9"
+        },
+        "node_id": "e8de27f92ae0",
+        "location": {
+          "latitude": 48.7692949,
+          "longitude": 11.4265007
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 59108.02,
+        "memory_usage": 0.8999306999307,
+        "clients": 0,
+        "rootfs_usage": 0.36875,
+        "loadavg": 0.09,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "f81a675aa264": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "00:04:9f:ef:01:01",
+            "fa:1b:67:5a:a2:64",
+            "fa:1d:69:5a:a2:64",
+            "fa:1e:67:5a:a2:64",
+            "fa:1d:68:5a:a2:64"
+          ],
+          "mac": "f8:1a:67:5a:a2:64",
+          "addresses": [
+            "fe80:0:0:0:fa1a:67ff:fe5a:a264",
+            "2a03:2260:116:0:fa1a:67ff:fe5a:a264"
+          ]
+        },
+        "hostname": "neal-StWh-00",
+        "hardware": {
+          "model": "TP-Link TL-WDR4900 v1"
+        },
+        "node_id": "f81a675aa264",
+        "location": {
+          "latitude": 48.758004169721,
+          "longitude": 11.442673802376
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "beta"
+          },
+          "firmware": {
+            "release": "v2014.4+14",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 7961.42,
+        "memory_usage": 0.3130058168942843,
+        "clients": 4,
+        "rootfs_usage": 0.039473684210526,
+        "loadavg": 0.14,
+        "gateway": "ffin-gw2"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "f81a67a5d728": {
+      "nodeinfo": {
+        "network": {
+          "mesh_interfaces": [
+            "fa:1d:69:a5:d7:28",
+            "fa:1e:67:a5:d7:28",
+            "fa:1b:67:a5:d7:28",
+            "fa:1d:68:a5:d7:28"
+          ],
+          "mac": "f8:1a:67:a5:d7:28",
+          "addresses": [
+            "2a03:2260:116:0:fa1a:67ff:fea5:d728",
+            "fe80:0:0:0:fa1a:67ff:fea5:d728"
+          ]
+        },
+        "hostname": "B2S",
+        "hardware": {
+          "model": "TP-Link TL-WDR4900 v1"
+        },
+        "node_id": "f81a67a5d728",
+        "location": {
+          "latitude": 48.7657,
+          "longitude": 11.4183
+        },
+        "software": {
+          "batman-adv": {
+            "compat": 14,
+            "version": "2013.4.0"
+          },
+          "autoupdater": {
+            "enabled": true,
+            "branch": "stable"
+          },
+          "firmware": {
+            "release": "v2014.4+7",
+            "base": "gluon-v2014.4"
+          },
+          "fastd": {
+            "version": "v16",
+            "enabled": true
+          }
+        }
+      },
+      "statistics": {
+        "uptime": 691465.95,
+        "memory_usage": 0.29975973697521496,
+        "clients": 0,
+        "rootfs_usage": 0.040204678362573,
+        "loadavg": 0.09,
+        "gateway": "ffin-gw1"
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:28:02"
+    },
+    "ffin-gw1": {
+      "nodeinfo": {
+        "node_id": "ffin-gw1",
+        "hostname": "ffin-gw1",
+        "network": {
+          "mesh_interfaces": [
+            "ba:d1:de:af:00:02"
+          ]
+        }
+      },
+      "statistics": {
+        "clients": 0
+      },
+      "flags": {
+        "gateway": true,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:40:02"
+    },
+    "ffin-gw2": {
+      "nodeinfo": {
+        "node_id": "ffin-gw2",
+        "hostname": "ffin-gw2",
+        "network": {
+          "mesh_interfaces": [
+            "ba:d1:de:af:00:03"
+          ]
+        }
+      },
+      "statistics": {
+        "clients": 0
+      },
+      "flags": {
+        "gateway": true,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:40:02"
+    },
+    "ffin-web": {
+      "nodeinfo": {
+        "node_id": "ffin-web",
+        "hostname": "ffin-web",
+        "network": {
+          "mesh_interfaces": [
+            "ba:d1:de:af:00:11"
+          ]
+        }
+      },
+      "statistics": {
+        "clients": 0
+      },
+      "flags": {
+        "gateway": false,
+        "online": true
+      },
+      "lastseen": "2015-04-19T13:45:01",
+      "firstseen": "2015-04-18T21:40:02"
     }
-  ], 
-  "meta": {
-    "timestamp": "2015-01-24T00:33:02"
-  }, 
-  "links": [
-    {
-      "source": 0, 
-      "type": "vpn", 
-      "quality": "1.016, 1.000", 
-      "id": "ba:d1:de:af:00:03-c6:72:1f:41:fd:1a", 
-      "target": 3
-    }, 
-    {
-      "source": 1, 
-      "type": "vpn", 
-      "quality": "1.016, 1.000", 
-      "id": "ba:d1:de:af:00:02-ea:98:f6:51:af:ba", 
-      "target": 7
-    }, 
-    {
-      "source": 7, 
-      "type": "vpn", 
-      "quality": "1.000, 1.000", 
-      "id": "ba:d1:de:af:00:02-c6:72:1f:41:fd:1a", 
-      "target": 0
-    }, 
-    {
-      "source": 7, 
-      "type": "vpn", 
-      "quality": "1.016, 1.000, 4.474", 
-      "id": "ba:d1:de:af:00:02-c6:72:1f:bd:4d:d4", 
-      "target": 6
-    }, 
-    {
-      "source": 8, 
-      "type": "vpn", 
-      "quality": "1.000, 1.250", 
-      "id": "ba:d1:de:af:00:03-ba:d1:de:af:00:10", 
-      "target": 3
-    }, 
-    {
-      "source": 1, 
-      "type": "vpn", 
-      "quality": "1.000, 1.000", 
-      "id": "ba:d1:de:af:00:03-ea:98:f6:51:af:ba", 
-      "target": 3
-    }, 
-    {
-      "source": 7, 
-      "type": "vpn", 
-      "quality": "1.000, 3.923, 5.667", 
-      "id": "ba:d1:de:af:00:02-ba:d1:de:af:00:10", 
-      "target": 8
-    }, 
-    {
-      "source": 7, 
-      "type": "vpn", 
-      "quality": "1.000, 1.000, 5.000", 
-      "id": "ba:d1:de:af:00:02-ea:98:f6:4b:81:d2", 
-      "target": 4
-    }, 
-    {
-      "source": 7, 
-      "type": "vpn", 
-      "quality": "1.000, 1.000, 4.250", 
-      "id": "ba:d1:de:af:00:02-c6:72:1f:e8:0a:68", 
-      "target": 2
-    }, 
-    {
-      "source": 9, 
-      "type": "vpn", 
-      "quality": "1.000, 1.000", 
-      "id": "ba:d1:de:af:00:02-c6:72:1f:e7:c4:00", 
-      "target": 7
-    }, 
-    {
-      "source": 9, 
-      "type": "vpn", 
-      "quality": "1.000, 1.000", 
-      "id": "ba:d1:de:af:00:03-c6:72:1f:e7:c4:00", 
-      "target": 3
-    }, 
-    {
-      "source": 1, 
-      "type": null, 
-      "quality": "1.000, 1.016", 
-      "id": "c6:71:20:41:fd:1a-ea:97:f7:51:af:ba", 
-      "target": 0
-    }, 
-    {
-      "source": 7, 
-      "type": "vpn", 
-      "quality": "1.000, 1.000, 4.250", 
-      "id": "12:02:ed:cd:a5:96-ba:d1:de:af:00:02", 
-      "target": 5
-    }, 
-    {
-      "source": 5, 
-      "type": "vpn", 
-      "quality": "1.000, 1.000", 
-      "id": "12:02:ed:cd:a5:96-ba:d1:de:af:00:03", 
-      "target": 3
-    }, 
-    {
-      "source": 7, 
-      "type": "vpn", 
-      "quality": "1.000, 1.000, 4.636", 
-      "id": "ba:d1:de:af:00:02-ba:d1:de:af:00:03", 
-      "target": 3
-    }
-  ]
+  },
+  "version": 1
 }
