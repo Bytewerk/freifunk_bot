@@ -8,8 +8,121 @@ import sys
 import os
 import threading
 import sqlite3
+import json
 
 import config
+
+class Ratelimiter:
+	def __init__(self):
+		self.ratelimitMessages = 0
+		self.nextMessageTime = 0
+
+	def ratelimit(self):
+		now = time.time()
+
+		if now < self.nextMessageTime:
+			# bot is sending too fast
+			self.ratelimitMessages += 1
+
+			print("RATELIMITER: {} messages too fast.".format(self.ratelimitMessages))
+
+			if self.ratelimitMessages > config.RATELIMIT_MESSAGES:
+				time.sleep(self.nextMessageTime - now)
+		else:
+			self.ratelimitMessages = 0
+
+		self.nextMessageTime = time.time() + config.RATELIMIT_INTERVAL
+
+class EventHandler:
+	def __init__(self):
+		self.broadcastFIFO = open(config.DISTSERV_FIFO, 'w')
+		self.fifoOpen = True
+
+		self.sendBroadcast({'info': 'Startup successful'})
+
+	def setConnection(self, conn):
+		self.connection = conn
+
+	def setTarget(self, target):
+		self.target = target
+
+	def setRatelimiter(self, rl):
+		self.ratelimiter = rl
+
+	def sendBroadcast(self, eventDict):
+		try:
+			if not self.fifoOpen:
+				# try to reopen the FIFO
+				self.broadcastFIFO = open(config.DISTSERV_FIFO, 'w')
+				self.fifoOpen = True
+
+			self.broadcastFIFO.write(json.dumps(eventDict) + "\n")
+			self.broadcastFIFO.flush()
+		except BrokenPipeError:
+			self.fifoOpen = False
+
+	def sendNotice(self, message):
+		self.ratelimiter.ratelimit()
+		self.connection.notice(self.target, message)
+
+	# Notifications about Highscores
+	def highscoreRegisteredNodes(self, count):
+		eventDict = {'type': 'registered_nodes', 'highscore': True, 'count': count}
+		self.sendBroadcast(eventDict)
+
+		if config.NOTIFY_NET_HIGHSCORES:
+			self.sendNotice("Neuer Highscore: {:d} registrierte Knoten!".format(count))
+
+	def highscoreOnlineNodes(self, count):
+		eventDict = {'type': 'online_nodes', 'highscore': True, 'count': count}
+		self.sendBroadcast(eventDict)
+
+		if config.NOTIFY_NET_HIGHSCORES:
+			self.sendNotice("Neuer Highscore: {:d} Knoten online!".format(count))
+
+	def highscoreOnlineClients(self, count):
+		eventDict = {'type': 'clients', 'highscore': True, 'count': count}
+		self.sendBroadcast(eventDict)
+
+		if config.NOTIFY_NODE_HIGHSCORES:
+			self.sendNotice("Neuer Highscore: {:d} Clients verbunden!".format(count))
+
+	def highscoreClientsAtNode(self, node):
+		eventDict = {'type': 'node_clients', 'highscore': True, 'node': node.toDict()}
+		self.sendBroadcast(eventDict)
+		self.sendNotice("Neuer Highscore: Knoten {:s} hat {:d} Clients!".format(node.readableName(), node.max_clients))
+
+	# Notifications about Network Changes
+	def newNode(self, node):
+		eventDict = {'type': 'new_node', 'node': node.toDict()}
+		self.sendBroadcast(eventDict)
+
+		if config.NOTIFY_NEW_NODES:
+			self.sendNotice("Neuer Knoten: {:s}".format(node.readableName()))
+
+	def nodeDeleted(self, node):
+		eventDict = {'type': 'node_deleted', 'node': node.toDict()}
+		self.sendBroadcast(eventDict)
+
+		if config.NOTIFY_DELETED_NODES:
+			self.sendNotice("Knoten gelöscht: {:s}".format(node.readableName()))
+
+	def nodeRenamed(self, node, old_node):
+		eventDict = {'type': 'node_renamed', 'node': node.toDict(), 'node_name_prev': old_node.name}
+		self.sendBroadcast(eventDict)
+
+		if config.NOTIFY_RENAMED_NODES:
+			self.sendNotice("Knoten {:s} heißt jetzt {:s}".format(old_node.readableName(), node.readableName()))
+
+	def nodeStatusChanged(self, node):
+		eventDict = {'type': 'online_status_changed', 'node': node.toDict()}
+		self.sendBroadcast(eventDict)
+
+		if config.NOTIFY_ONLINE_STATUS:
+			self.sendNotice("{:s} ist jetzt {}".format(
+				node.readableName(),
+				"online" if node.online else "offline"))
+
 
 class Node:
 	def __init__(self, json_obj):
@@ -58,6 +171,12 @@ class Node:
 	def fullIdentifier(self):
 		return "{} [{}]".format(self.name, self.nid)
 
+	def toDict(self):
+		return {'id': self.nid,
+		        'name': self.name,
+		        'online': self.online,
+		        'clients': self.clients}
+
 class Highscore:
 	def __init__(self, key):
 		self.key       = key
@@ -100,13 +219,15 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 
 		self.channel_topic = ""
 
+		self.ratelimiter = Ratelimiter()
+
+		self.eventHandler = EventHandler()
+		self.eventHandler.setTarget(target)
+		self.eventHandler.setRatelimiter(self.ratelimiter)
+
 		self.nodes_highscore        = Highscore('nodes')
 		self.clients_highscore      = Highscore('clients')
 		self.nodes_online_highscore = Highscore('nodes_online')
-
-		# for rate limiter
-		self.ratelimitMessages = 0
-		self.nextMessageTime = 0
 
 		# load the global highscores
 		db = sqlite3.connect(config.DATABASE)
@@ -161,29 +282,9 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 
 		self.handle_message(msg, source, True)
 
-	def ratelimit(self):
-		now = time.time()
-
-		if now < self.nextMessageTime:
-			# bot is sending too fast
-			self.ratelimitMessages += 1
-
-			print("RATELIMITER: {} messages too fast.".format(self.ratelimitMessages))
-
-			if self.ratelimitMessages > config.RATELIMIT_MESSAGES:
-				time.sleep(self.nextMessageTime - now)
-		else:
-			self.ratelimitMessages = 0
-
-		self.nextMessageTime = time.time() + config.RATELIMIT_INTERVAL
-
 	def send_command_response(self, message, target):
-		self.ratelimit()
+		self.ratelimiter.ratelimit()
 		self.connection.privmsg(target, message)
-
-	def send_notice(self, message):
-		self.ratelimit()
-		self.connection.notice(self.target, message)
 
 	def find_node(self, identifier):
 		for node in self.known_nodes.values():
@@ -383,6 +484,9 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 					# node is missing relevant information for tracking
 					pass
 
+			# Update connection reference of the event handler before sending messages
+			self.eventHandler.setConnection(self.connection)
+
 			# check if this is the first run
 			firstRun = not self.known_nodes
 			if firstRun:
@@ -419,28 +523,17 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 					if self.known_nodes[nid].name != current_nodes[nid].name:
 						renamed_nodes.append(nid)
 
-			if config.NOTIFY_NEW_NODES:
-				for nid in new_nodes:
-					msg = "Neuer Knoten: {:s}".format(current_nodes[nid].readableName())
-					self.send_notice(msg)
+			for nid in new_nodes:
+				self.eventHandler.newNode(current_nodes[nid])
 
-			if config.NOTIFY_DELETED_NODES:
-				for nid in really_gone_nodes:
-					msg = "Knoten gelöscht: {:s}".format(self.known_nodes[nid].readableName())
-					self.send_notice(msg)
+			for nid in really_gone_nodes:
+				self.eventHandler.nodeDeleted(self.known_nodes[nid])
 
-			if config.NOTIFY_ONLINE_STATUS:
-				for nid in changed_nodes:
-					msg = "{:s} ist jetzt {}".format(
-							current_nodes[nid].readableName(),
-							"online" if current_nodes[nid].online else "offline")
-					self.send_notice(msg)
+			for nid in changed_nodes:
+				self.eventHandler.nodeStatusChanged(current_nodes[nid])
 
-			if config.NOTIFY_RENAMED_NODES:
-				for nid in renamed_nodes:
-					msg = "Knoten {:s} heißt jetzt {:s}".format(self.known_nodes[nid].readableName(), current_nodes[nid].readableName())
-					self.send_notice(msg)
-
+			for nid in renamed_nodes:
+				self.eventHandler.nodeRenamed(current_nodes[nid], self.known_nodes[nid])
 
 			# update global network status
 			self.last_nodes_online = self.num_nodes_online
@@ -461,31 +554,24 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			# per-node client highscore
 			for node in current_nodes.values():
 				if node.updateHighscore(db) and not firstRun and node.max_clients > 0:
-					msg = "Neuer Highscore: Knoten {:s} hat {:d} Clients!".format(node.readableName(), node.max_clients)
-					self.send_notice(msg)
+					self.eventHandler.highscoreClientsAtNode(node)
 
 			db.commit()
 
 			# nodes registered
 			if self.nodes_highscore.update(self.num_nodes):
 				self.nodes_highscore.save(db)
-				if config.NOTIFY_NET_HIGHSCORES:
-					msg = "Neuer Highscore: {:d} registrierte Knoten!".format(self.num_nodes)
-					self.send_notice(msg)
+				self.eventHandler.highscoreRegisteredNodes(self.num_nodes)
 
 			# nodes online
 			if self.nodes_online_highscore.update(self.num_nodes_online):
 				self.nodes_online_highscore.save(db)
-				if config.NOTIFY_NET_HIGHSCORES:
-					msg = "Neuer Highscore: {:d} Knoten online!".format(self.num_nodes_online)
-					self.send_notice(msg)
+				self.eventHandler.highscoreOnlineNodes(self.num_nodes_online)
 
 			# clients
 			if self.clients_highscore.update(self.num_clients):
 				self.clients_highscore.save(db)
-				if config.NOTIFY_NODE_HIGHSCORES:
-					msg = "Neuer Highscore: {:d} Clients verbunden!".format(self.num_clients)
-					self.send_notice(msg)
+				self.eventHandler.highscoreOnlineClients(self.num_clients)
 
 			db.commit()
 			db.close()

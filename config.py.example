@@ -60,3 +60,9 @@ PLOT_SKIP_TIMEOUT = 20*60
 # time interval vor min/max/average accumulation in long-term plots
 PLOT_ACC_TIME_1Y  = 3*24*3600
 PLOT_ACC_TIME_30D =   12*3600
+
+# distserv configuration
+DISTSERV_HOST = ''
+DISTSERV_PORT = 2738
+DISTSERV_FIFO = 'distserv.fifo'
+DISTSERV_BACKLOG = 5
