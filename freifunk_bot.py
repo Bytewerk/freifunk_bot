@@ -123,6 +123,22 @@ class EventHandler:
 				node.readableName(),
 				"online" if node.online else "offline"))
 
+	def registeredNodesChanged(self, count):
+		eventDict = {'type': 'registered_nodes', 'highscore': False, 'count': count}
+		self.sendBroadcast(eventDict)
+
+	def onlineNodesChanged(self, count):
+		eventDict = {'type': 'online_nodes', 'highscore': False, 'count': count}
+		self.sendBroadcast(eventDict)
+
+	def clientsChanged(self, count):
+		eventDict = {'type': 'clients', 'highscore': False, 'count': count}
+		self.sendBroadcast(eventDict)
+
+	def clientsAtNodeChanged(self, node):
+		eventDict = {'type': 'node_clients', 'highscore': False, 'node': node.toDict()}
+		self.sendBroadcast(eventDict)
+
 
 class Node:
 	def __init__(self, json_obj):
@@ -582,41 +598,49 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			self.known_nodes = current_nodes
 
 	def log_network_changes(self, current_nodes, new_nodes, gone_nodes, renamed_nodes):
-		if config.LOG_NODECOUNT:
-			with open(config.LOG_NODECOUNT, 'a') as logfile:
-				if self.num_nodes != self.last_nodes:
+		if self.num_nodes != self.last_nodes:
+			self.eventHandler.registeredNodesChanged(self.num_nodes)
+			if config.LOG_NODECOUNT:
+				with open(config.LOG_NODECOUNT, 'a') as logfile:
 					print("Number of nodes changed: {} -> {}".format(self.last_nodes, self.num_nodes))
 					logfile.write("{} {}\n".format(int(time.time()), self.num_nodes))
 
-		if config.LOG_ONLINENODECOUNT:
-			with open(config.LOG_ONLINENODECOUNT, 'a') as logfile:
-				if self.num_nodes_online != self.last_nodes_online:
+		if self.num_nodes_online != self.last_nodes_online:
+			self.eventHandler.onlineNodesChanged(self.num_nodes_online)
+			if config.LOG_ONLINENODECOUNT:
+				with open(config.LOG_ONLINENODECOUNT, 'a') as logfile:
 					print("Number of online nodes changed: {} -> {}".format(self.last_nodes_online, self.num_nodes_online))
 					logfile.write("{} {}\n".format(int(time.time()), self.num_nodes_online))
 
-		if config.LOG_TOTALCLIENTCOUNT:
-			with open(config.LOG_TOTALCLIENTCOUNT, 'a') as logfile:
-				if self.num_clients != self.last_clients:
+		if self.num_clients != self.last_clients:
+			self.eventHandler.clientsChanged(self.num_clients)
+			if config.LOG_TOTALCLIENTCOUNT:
+				with open(config.LOG_TOTALCLIENTCOUNT, 'a') as logfile:
 					print("Number of connected clients changed: {} -> {}".format(self.last_clients, self.num_clients))
 					logfile.write("{} {}\n".format(int(time.time()), self.num_clients))
 
-		if config.LOG_NODECLIENTCOUNT:
-			with open(config.LOG_NODECLIENTCOUNT, 'a') as logfile:
-				current_nids = set(current_nodes.keys())
-				known_nids = set(self.known_nodes.keys())
-				all_nids = current_nids | known_nids
-				for nid in all_nids:
-					clientcount = -1
-					if nid in new_nodes:
-						# new node
-						clientcount = current_nodes[nid].clients
-					elif nid in gone_nodes:
-						# deleted node
-						clientcount = 0
-					elif self.known_nodes[nid].clients != current_nodes[nid].clients:
-						clientcount = current_nodes[nid].clients
+		current_nids = set(current_nodes.keys())
+		known_nids = set(self.known_nodes.keys())
+		all_nids = current_nids | known_nids
+		for nid in all_nids:
+			clientcount = -1
+			node = None
+			if nid in new_nodes:
+				# new node
+				clientcount = current_nodes[nid].clients
+				node = current_nodes[nid]
+			elif nid in gone_nodes:
+				# deleted node
+				clientcount = 0
+				node = self.known_nodes[nid]
+			elif self.known_nodes[nid].clients != current_nodes[nid].clients:
+				clientcount = current_nodes[nid].clients
+				node = current_nodes[nid]
 
-					if clientcount >= 0:
+			if clientcount >= 0:
+				self.eventHandler.clientsAtNodeChanged(node)
+				if config.LOG_NODECLIENTCOUNT:
+					with open(config.LOG_NODECLIENTCOUNT, 'a') as logfile:
 						print("Number of clients for node {} changed: {}".format(nid, clientcount))
 						logfile.write("{} {} {}\n".format(int(time.time()), nid, clientcount))
 
