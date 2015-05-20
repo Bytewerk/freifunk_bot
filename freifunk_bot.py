@@ -37,6 +37,7 @@ class EventHandler:
 	def __init__(self):
 		self.broadcastFIFO = open(config.DISTSERV_FIFO, 'w')
 		self.fifoOpen = True
+		self.timestamp = time.time()
 
 		self.sendBroadcast({'info': 'Startup successful'})
 
@@ -49,7 +50,13 @@ class EventHandler:
 	def setRatelimiter(self, rl):
 		self.ratelimiter = rl
 
+	def setTimestamp(self, ts):
+		self.timestamp = ts
+
 	def sendBroadcast(self, eventDict):
+		# add a timestamp to all messages
+		eventDict['timestamp'] = self.timestamp
+
 		try:
 			if not self.fifoOpen:
 				# try to reopen the FIFO
@@ -502,6 +509,7 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 
 			# Update connection reference of the event handler before sending messages
 			self.eventHandler.setConnection(self.connection)
+			self.eventHandler.setTimestamp(time.time())
 
 			# check if this is the first run
 			firstRun = not self.known_nodes
