@@ -119,44 +119,62 @@ def limitdata(timestamp, data, maxage):
 
 	return out_timestamp, out_data
 
+def file_outdated(filename, max_age):
+	if not os.path.exists(filename):
+		# file does not yet exist -> should be created
+		return True
+	elif os.path.getmtime(filename) < time.time() - max_age:
+		# file was not changed for max_age seconds -> should be updated
+		return True
+	else:
+		return False
+
 def plot_limited(timestamp, ydata, ylabel, basetitle, color, base_output_file):
 	datetext = time.strftime('%Y-%m-%d %H:%M')
 
-	lim_timestamp, lim_data = limitdata(timestamp, ydata, 356*24*3600)
-	plot_minmax(lim_timestamp,
-	     lim_data,
-	     ylabel,
-	     config.PLOT_ACC_TIME_1Y,
-	     '{}\n(1y @{})'.format(basetitle, datetext),
-	     color,
-	     os.path.join(config.PLOT_DIR, '{}_1year.svg'.format(base_output_file)))
+	targetfile = '{}_1year.svg'.format(base_output_file)
+	if file_outdated(targetfile, config.PLOT_UPDATE_INTV_1Y):
+		lim_timestamp, lim_data = limitdata(timestamp, ydata, 356*24*3600)
+		plot_minmax(lim_timestamp,
+		     lim_data,
+		     ylabel,
+		     config.PLOT_ACC_TIME_1Y,
+		     '{}\n(1y @{})'.format(basetitle, datetext),
+		     color,
+		     os.path.join(config.PLOT_DIR, targetfile))
 
-	lim_timestamp, lim_data = limitdata(timestamp, ydata, 30*24*3600)
-	plot_minmax(lim_timestamp,
-	     lim_data,
-	     ylabel,
-	     config.PLOT_ACC_TIME_30D,
-	     '{}\n(30d @{})'.format(basetitle, datetext),
-	     color,
-	     os.path.join(config.PLOT_DIR, '{}_30d.svg'.format(base_output_file)))
+	targetfile = '{}_30d.svg'.format(base_output_file)
+	if file_outdated(targetfile, config.PLOT_UPDATE_INTV_30D):
+		lim_timestamp, lim_data = limitdata(timestamp, ydata, 30*24*3600)
+		plot_minmax(lim_timestamp,
+		     lim_data,
+		     ylabel,
+		     config.PLOT_ACC_TIME_30D,
+		     '{}\n(30d @{})'.format(basetitle, datetext),
+		     color,
+		     os.path.join(config.PLOT_DIR, targetfile))
+	
+	targetfile = '{}_24h.svg'.format(base_output_file)
+	if file_outdated(targetfile, config.PLOT_UPDATE_INTV_24H):
+		lim_timestamp, lim_data = limitdata(timestamp, ydata, 24*3600)
+		plot(lim_timestamp,
+		     lim_data,
+		     ylabel,
+		     '{}\n(24h @{})'.format(basetitle, datetext),
+		     color,
+		     os.path.join(config.PLOT_DIR, targetfile))
 
-	lim_timestamp, lim_data = limitdata(timestamp, ydata, 24*3600)
-	plot(lim_timestamp,
-	     lim_data,
-	     ylabel,
-	     '{}\n(24h @{})'.format(basetitle, datetext),
-	     color,
-	     os.path.join(config.PLOT_DIR, '{}_24h.svg'.format(base_output_file)))
+	targetfile = '{}_3h.svg'.format(base_output_file)
+	if file_outdated(targetfile, config.PLOT_UPDATE_INTV_3H):
+		lim_timestamp, lim_data = limitdata(timestamp, ydata, 3*3600)
+		plot(lim_timestamp,
+		    lim_data,
+		    ylabel,
+		    '{}\n(3h @{})'.format(basetitle, datetext),
+		    color,
+		    os.path.join(config.PLOT_DIR, targetfile))
 
-	lim_timestamp, lim_data = limitdata(timestamp, ydata, 3*3600)
-	plot(lim_timestamp,
-	     lim_data,
-	     ylabel,
-	     '{}\n(3h @{})'.format(basetitle, datetext),
-	     color,
-	     os.path.join(config.PLOT_DIR, '{}_3h.svg'.format(base_output_file)))
-
-# load node names
+#	 load node names
 nodenames = {}
 with open(config.LOG_NODENAMES, 'r') as nodefile:
 	for line in nodefile:
