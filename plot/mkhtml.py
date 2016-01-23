@@ -10,7 +10,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 import config
 
 def node_plot_exists(nid):
-	return os.path.exists(os.path.join(os.path.dirname(config.PLOT_DIR), 'clients_{:s}_3h.svg'.format(nid)))
+	return os.path.exists(os.path.join(config.PLOT_DIR, 'clients_{:s}_3h.svg'.format(nid)))
 
 def mkplotline(title, anchor, basepath):
 	return """
