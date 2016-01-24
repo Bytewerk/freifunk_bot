@@ -44,6 +44,12 @@ div.jumplist {
 	background-color: #666;
 }
 
+div.jumplist p {
+	max-height: 6.25em;
+	line-height: 1.25em;
+	overflow-y: scroll;
+}
+
 span.jumpentry {
 	margin-right: 0.5em;
 }
