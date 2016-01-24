@@ -12,18 +12,18 @@ import config
 def node_plot_exists(nid):
 	return os.path.exists(os.path.join(config.PLOT_DIR, 'clients_{:s}_3h.svg'.format(nid)))
 
-def mkplotline(title, anchor, basepath):
+def mkplotline(title, html_id, basepath):
 	return """
-		<div class="history_box">
-			<h2><a name="{1:s}">{0:s}</a></h2>
+		<div id="{1:s}" class="history_box">
+			<h2>{0:s}</h2>
 			<p class="plot_line">
-				   <span class="plot"><img src="{2:s}_1year.svg"></span><!--
-				--><span class="plot"><img src="{2:s}_30d.svg"></span><!--
-				--><span class="plot"><img src="{2:s}_24h.svg"></span><!--
-				--><span class="plot"><img src="{2:s}_3h.svg"></span>
+				   <span class="plot 1year"><img src="{2:s}_1year.svg"></span><!--
+				--><span class="plot 30d"><img src="{2:s}_30d.svg"></span><!--
+				--><span class="plot 24h"><img src="{2:s}_24h.svg"></span><!--
+				--><span class="plot 3h"><img src="{2:s}_3h.svg"></span>
 			</p>
 		</div>
-		""".format(title, anchor, basepath)
+		""".format(title, html_id, basepath)
 
 # load node names
 nodenames = {}
@@ -35,6 +35,9 @@ with open(config.LOG_NODENAMES, 'r') as nodefile:
 htmlstring = ""
 
 pathprefix = os.path.relpath(config.PLOT_DIR, os.path.dirname(config.PLOT_HTML))
+
+# export pathprefix to the javascript
+htmlstring += '<script type="text/javascript">pathprefix = "{:s}";</script>'.format(pathprefix)
 
 htmlstring += mkplotline("Bekannte Knoten", 'nodes', os.path.join(pathprefix, 'nodes'))
 htmlstring += mkplotline("Knoten online", 'nodes_online', os.path.join(pathprefix, 'nodes_online'))
@@ -48,19 +51,22 @@ htmlstring += '<div class="jumplist"><h2>Knotenliste</h2><p>'
 for name in names:
 	nid = nodenames[name]
 	if node_plot_exists(nid):
-		htmlstring += '<span class="jumpentry"><a href="#{0:s}">{1:s}</a></span> '.format(
+		htmlstring += '<span class="jumpentry"><a href="javascript:update_plots(\'{0:s}\', \'{1:s}\')">{1:s}</a></span> '.format(
 				nodenames[name],
 				name)
 htmlstring += '</p></div>'
 
 # generate node plot lines
-for name in names:
+for idx in range(len(names)):
+	name = names[idx]
 	nid = nodenames[name]
+
 	if node_plot_exists(nid):
 		htmlstring += mkplotline(
 				"Clients an {}".format(name),
-				nid,
+				'node_clients',
 				os.path.join(pathprefix, 'clients_{}'.format(nid)))
+		break;
 
 htmlstring += '<p class="date">Letzte Aktualisierung: {:s}</p>'.format(
 		time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
