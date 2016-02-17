@@ -97,7 +97,9 @@ class EventHandler:
 	def highscoreClientsAtNode(self, node):
 		eventDict = {'type': 'node_clients', 'highscore': True, 'node': node.toDict()}
 		self.sendBroadcast(eventDict)
-		self.sendNotice("Neuer Highscore: Knoten {:s} hat {:d} Clients!".format(node.readableName(), node.max_clients))
+
+		if config.NOTIFY_NODE_CLIENT_HIGHSCORES:
+			self.sendNotice("Neuer Highscore: Knoten {:s} hat {:d} Clients!".format(node.readableName(), node.max_clients))
 
 	# Notifications about Network Changes
 	def newNode(self, node):

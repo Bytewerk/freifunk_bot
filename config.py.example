@@ -30,12 +30,13 @@ RATELIMIT_MESSAGES = 4
 RATELIMIT_INTERVAL = 0.5
 
 # enable or disable notifications
-NOTIFY_ONLINE_STATUS   = True
-NOTIFY_NEW_NODES       = True
-NOTIFY_DELETED_NODES   = True
-NOTIFY_RENAMED_NODES   = True
-NOTIFY_NODE_HIGHSCORES = True
-NOTIFY_NET_HIGHSCORES  = True
+NOTIFY_ONLINE_STATUS          = True
+NOTIFY_NEW_NODES              = True
+NOTIFY_DELETED_NODES          = True
+NOTIFY_RENAMED_NODES          = True
+NOTIFY_NODE_HIGHSCORES        = True
+NOTIFY_NET_HIGHSCORES         = True
+NOTIFY_NODE_CLIENT_HIGHSCORES = True
 
 # use "/msg chanserv topic <target> <topic" instead of "/topic" to set the topic
 TOPIC_USE_CHANSERV = True
