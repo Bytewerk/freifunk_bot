@@ -496,7 +496,11 @@ class FreifunkBot(irc.client.SimpleIRCClient):
 			return
 
 		with self.known_nodes_lock:
-			json = r.json()
+			try:
+				json = r.json()
+			except ValueError as e:
+				print("Failed to parse JSON:".format(str(e)))
+				return
 
 			current_nodes = {}
 			for node in json['nodes'].values():
